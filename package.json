@@ -1,0 +1,23 @@
+{
+  "name": "diversity-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diversity-App/diversity-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diversity-App/diversity-app/issues"
+  },
+  "homepage": "https://github.com/Diversity-App/diversity-app#readme"
+}

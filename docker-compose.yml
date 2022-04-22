@@ -1,0 +1,35 @@
+version: '3'
+
+
+services:
+  postgres:
+    image: postgres
+    env_file:
+      - ../../diversity-app/apps/api/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      - ./apps/api/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./apps/api/data.sql:/docker-entrypoint-initdb.d/2-data.sql # Data de test
+    restart: always
+    networks:
+      - default
+  mongo:
+    image: mongo:latest
+    env_file:
+      - ./apps/api/.env
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - default
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./apps/api/.env
+    ports:
+      - "8080:8080"
+    restart: always
