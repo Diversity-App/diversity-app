@@ -6,3 +6,4 @@ pgdata
 .DS_Store
 data
 dist
+!.prettierrc.js
