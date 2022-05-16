@@ -1,0 +1,15 @@
+on: push
+name: Push CI
+jobs:
+  install:
+    name: Install dependencies
+    uses: Diversity-App/diversity-app/.github/workflows/install_job.yml@main
+  lint:
+    needs: [ install ]
+    uses: Diversity-App/diversity-app/.github/workflows/lint_job.yml@main
+#  openapi:
+#    needs: [ install ]
+#    uses: Diversity-App/diversity-app/.github/workflows/openapi_job.yml@main
+#  prisma:
+#    needs: [ install ]
+#    uses: Diversity-App/diversity-app/.github/workflows/prisma_job.yml@main

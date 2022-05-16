@@ -1,0 +1,28 @@
+on: [ workflow_dispatch, workflow_call ]
+name: Test Job
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        directories:
+          - apps/api
+          - apps/frontend
+      fail-fast: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        id: base-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./apps/api/node_modules
+            ./apps/frontend/node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '16'
+      - run: npm run test
+        working-directory: ${{ matrix.directories }}

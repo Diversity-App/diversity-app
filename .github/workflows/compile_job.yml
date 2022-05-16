@@ -1,0 +1,30 @@
+on: [ workflow_call, workflow_dispatch ]
+name: Compile Job
+jobs:
+  lint:
+    name: Compile code
+    strategy:
+      matrix:
+        directories:
+          - apps/api
+          - apps/frontend
+      fail-fast: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        id: base-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./apps/api/node_modules
+            ./apps/frontend/node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '16'
+      - run: npx prisma generate
+        if: ${{ matrix.directories }} == 'apps/api'
+      - run: npx tsc
+        working-directory: ${{ matrix.directories }}

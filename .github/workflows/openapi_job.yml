@@ -1,0 +1,21 @@
+on: [workflow_call, workflow_dispatch]
+name: Validate OpenAPI Job
+jobs:
+  lint:
+    name: Validate OpenAPI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        id: base-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./apps/api/node_modules
+            ./apps/front/node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: '16'
+      - run: npm run validate:swagger
