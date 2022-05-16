@@ -1,9 +1,17 @@
 {
-  "extends": "expo/tsconfig.base",
+  //  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "target": "esnext",
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "types": [
+      //      "react",
+      "react-native",
+      "jest"
+    ]
   },
   "compileOnSave": false
 }
