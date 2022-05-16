@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -9,12 +9,42 @@ import { nameValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
-import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
-import axios from 'axios';
+import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 
 type Props = {
     navigation: Navigation;
 };
+
+const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        marginTop: 4,
+    },
+    label: {
+        color: theme.colors.secondary,
+    },
+    link: {
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
+    root: { flex: 1, padding: 20 },
+    title: { textAlign: 'center', fontSize: 30 },
+    codeFieldRoot: { marginTop: 20 },
+    cell: {
+        width: 60,
+        height: 60,
+        lineHeight: 55,
+        fontSize: 24,
+        borderWidth: 2,
+        borderColor: '#eee',
+        margin: 5,
+        textAlign: 'center',
+        borderRadius: 5,
+    },
+    focusCell: {
+        borderColor: '#000',
+    },
+});
 
 const LoginScreen = ({ navigation }: Props) => {
     const [name, setName] = useState({ value: '', error: '' });
@@ -28,7 +58,7 @@ const LoginScreen = ({ navigation }: Props) => {
         value: password.value,
         setValue: setValue,
     });
-    const [error, setError] = useState('');
+    const [error, $setError] = useState('');
 
     const _onLoginPressed = () => {
         console.log(password.value, ' => ', name.value);
@@ -46,7 +76,7 @@ const LoginScreen = ({ navigation }: Props) => {
             password: password.value,
         };
 
-        const config = {
+        const $config = {
             method: 'post',
             url: 'http://localhost:8080/auth/login',
             data: data,
@@ -136,36 +166,5 @@ const LoginScreen = ({ navigation }: Props) => {
         </Background>
     );
 };
-
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        marginTop: 4,
-    },
-    label: {
-        color: theme.colors.secondary,
-    },
-    link: {
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
-    root: { flex: 1, padding: 20 },
-    title: { textAlign: 'center', fontSize: 30 },
-    codeFieldRoot: { marginTop: 20 },
-    cell: {
-        width: 60,
-        height: 60,
-        lineHeight: 55,
-        fontSize: 24,
-        borderWidth: 2,
-        borderColor: '#eee',
-        margin: 5,
-        textAlign: 'center',
-        borderRadius: 5,
-    },
-    focusCell: {
-        borderColor: '#000',
-    },
-});
 
 export default memo(LoginScreen);

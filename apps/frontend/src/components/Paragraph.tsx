@@ -5,9 +5,6 @@ import { theme } from '../core/theme';
 type Props = {
     children: React.ReactNode;
 };
-
-const Paragraph = ({ children }: Props) => <Text style={styles.text}>{children}</Text>;
-
 const styles = StyleSheet.create({
     text: {
         fontSize: 16,
@@ -17,5 +14,7 @@ const styles = StyleSheet.create({
         marginBottom: 14,
     },
 });
+
+const Paragraph = ({ children }: Props) => <Text style={styles.text}>{children}</Text>;
 
 export default memo(Paragraph);

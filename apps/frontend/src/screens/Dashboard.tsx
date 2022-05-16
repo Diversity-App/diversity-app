@@ -2,10 +2,8 @@ import React, { memo } from 'react';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
-import Paragraph from '../components/Paragraph';
 // import Button from '../components/Button';
 import { Navigation } from '../types';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 

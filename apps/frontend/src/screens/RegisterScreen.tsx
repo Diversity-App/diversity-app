@@ -1,12 +1,12 @@
 import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { Navigation } from '../types';
-import { passwordValidator, nameValidator } from '../core/utils';
+import { nameValidator, passwordValidator } from '../core/utils';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
@@ -26,12 +26,46 @@ type HTTPRequest = {
     data: User;
 };
 
+const styles = StyleSheet.create({
+    label: {
+        color: theme.colors.secondary,
+    },
+    button: {
+        marginTop: 24,
+    },
+    row: {
+        flexDirection: 'row',
+        marginTop: 4,
+    },
+    link: {
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
+    root: { flex: 1, padding: 20 },
+    title: { textAlign: 'center', fontSize: 30 },
+    codeFieldRoot: { marginTop: 20 },
+    cell: {
+        width: 60,
+        height: 60,
+        lineHeight: 55,
+        fontSize: 24,
+        borderWidth: 2,
+        borderColor: '#eee',
+        margin: 5,
+        textAlign: 'center',
+        borderRadius: 5,
+    },
+    focusCell: {
+        borderColor: '#000',
+    },
+});
+
 const RegisterScreen = ({ navigation }: Props) => {
     const [name, setName] = useState<{ value: string; error: string }>({ value: '', error: '' });
     const [password, setPassword] = useState<{ value: string; error: string }>({ value: '', error: '' });
     const CELL_COUNT: number = 4;
     const [enableMask, setEnableMask] = useState<boolean>(true);
-    const [value, setValue] = useState<string>('');
+    const [$value, setValue] = useState<string>('');
     const ref = useBlurOnFulfill({ value: password.value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
         value: password.value,
@@ -179,39 +213,5 @@ const RegisterScreen = ({ navigation }: Props) => {
         </Background>
     );
 };
-
-const styles = StyleSheet.create({
-    label: {
-        color: theme.colors.secondary,
-    },
-    button: {
-        marginTop: 24,
-    },
-    row: {
-        flexDirection: 'row',
-        marginTop: 4,
-    },
-    link: {
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
-    root: { flex: 1, padding: 20 },
-    title: { textAlign: 'center', fontSize: 30 },
-    codeFieldRoot: { marginTop: 20 },
-    cell: {
-        width: 60,
-        height: 60,
-        lineHeight: 55,
-        fontSize: 24,
-        borderWidth: 2,
-        borderColor: '#eee',
-        margin: 5,
-        textAlign: 'center',
-        borderRadius: 5,
-    },
-    focusCell: {
-        borderColor: '#000',
-    },
-});
 
 export default memo(RegisterScreen);
