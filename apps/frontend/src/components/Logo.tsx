@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-const Logo = () => <Image source={require('../assets/diversity_logo_white.png')} style={styles.image} />;
+const Logo = () => <Image source={require('../assets/logo_blanc.png')} style={styles.image} />;
 
 const styles = StyleSheet.create({
     image: {
         width: 128,
-        height: 128,
+        height: 142,
         marginBottom: 12,
     },
 });

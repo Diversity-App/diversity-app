@@ -8,7 +8,6 @@ import { Navigation } from '../types';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { makeRedirectUri, startAsync } from "expo-auth-session";
 
 type Props = {
     navigation: Navigation;
@@ -18,31 +17,6 @@ const Dashboard = ({ navigation }: Props) => {
     const connectSpotify = () => {
         console.log('linking spotify');
     };
-
-    const youtubeOAuth = async () => {
-        const redirectUrl = makeRedirectUri({ useProxy: true });
-        console.log("redirectUrl", redirectUrl);
-    
-        const urlParams = {
-          redirect_uri: redirectUrl,
-          access_type: "offline",
-          scope: "https://www.googleapis.com/auth/youtube",
-          response_type: "code",
-          client_id:
-            "1048252460044-u5mgq9q1mljgvko596b4cla3tvu3fkva.apps.googleusercontent.com",
-          prompt: "consent",
-        };
-        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(
-          urlParams
-        ).toString()}`;
-        // @ts-ignore
-        const { type, params } = await startAsync({ authUrl });
-        console.log(type);
-        switch(type) {
-            case 'success':
-                console.log(params.code)
-        }
-      };
 
     return (
         <Background>
@@ -56,7 +30,7 @@ const Dashboard = ({ navigation }: Props) => {
                 onAnimationComplete={() => console.log('onAnimationComplete')}
                 backgroundColor="#3d5875"
             />
-            <Button color={'#0386D0'} mode="contained" onPress={() => youtubeOAuth()}>
+            <Button color={'#0386D0'} mode="contained" onPress={() => connectSpotify()}>
                 Connect to Youtube
             </Button>
             <Button color={'#0386D0'} mode="contained" onPress={() => navigation.navigate('HomeScreen')}>
