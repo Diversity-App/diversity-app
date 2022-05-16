@@ -20,15 +20,17 @@ const HomeScreen = ({ navigation }: Props) => (
         <Logo />
         <Header>Diversity</Header>
 
-        <Paragraph>Ouvrez vous a de nouveaux horizons médiatiques.</Paragraph>
+        <Paragraph>Open yourself to new media horizons.</Paragraph>
         <Button
-            style={{ margin: 10 }}
-            mode="contained"
-            color={'#0386D0'}
+            style={{ margin: 10, borderRadius: 25, width: 150, height: 50, backgroundColor: 'white', justifyContent: 'center' }}
+            color={'black'}
             onPress={() => navigation.navigate('LoginScreen')}>
             Log In
         </Button>
-        <Button mode="contained" color={'#0386D0'} onPress={() => navigation.navigate('RegisterScreen')}>
+        <Button
+            style={{ margin: 10, borderRadius: 25, width: 150, height: 50, backgroundColor: 'white', justifyContent: 'center' }}
+            color={'black'}
+            onPress={() => navigation.navigate('RegisterScreen')}>
             Sign Up
         </Button>
     </Background>
