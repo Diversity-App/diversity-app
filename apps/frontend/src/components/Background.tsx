@@ -1,18 +1,10 @@
 import React, { memo } from 'react';
-import { ImageBackground, StyleSheet, KeyboardAvoidingView, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { theme } from '../core/theme';
 
 type Props = {
     children: React.ReactNode;
 };
-
-const Background = ({ children }: Props) => (
-    <View style={styles.background}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-            {children}
-        </KeyboardAvoidingView>
-    </View>
-);
 
 const styles = StyleSheet.create({
     background: {
@@ -30,5 +22,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+const Background = ({ children }: Props) => (
+    <View style={styles.background}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+            {children}
+        </KeyboardAvoidingView>
+    </View>
+);
 
 export default memo(Background);

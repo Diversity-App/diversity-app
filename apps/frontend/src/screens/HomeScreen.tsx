@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import Background from '../components/Background';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import { Button } from 'react-native-paper';
@@ -22,13 +21,27 @@ const HomeScreen = ({ navigation }: Props) => (
 
         <Paragraph>Open yourself to new media horizons.</Paragraph>
         <Button
-            style={{ margin: 10, borderRadius: 25, width: 150, height: 50, backgroundColor: 'white', justifyContent: 'center' }}
+            style={{
+                margin: 10,
+                borderRadius: 25,
+                width: 150,
+                height: 50,
+                backgroundColor: 'white',
+                justifyContent: 'center',
+            }}
             color={'black'}
             onPress={() => navigation.navigate('LoginScreen')}>
             Log In
         </Button>
         <Button
-            style={{ margin: 10, borderRadius: 25, width: 150, height: 50, backgroundColor: 'white', justifyContent: 'center' }}
+            style={{
+                margin: 10,
+                borderRadius: 25,
+                width: 150,
+                height: 50,
+                backgroundColor: 'white',
+                justifyContent: 'center',
+            }}
             color={'black'}
             onPress={() => navigation.navigate('RegisterScreen')}>
             Sign Up
