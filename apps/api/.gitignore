@@ -4,6 +4,6 @@ node_modules
 .env
 pgdata
 .DS_Store
-data
 dist
 !.prettierrc.js
+*.map

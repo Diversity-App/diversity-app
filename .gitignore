@@ -2,7 +2,11 @@
 node_modules
 *.js
 .env
-pgdata
 .DS_Store
-data
+/data/*
 dist
+*.map
+
+!*.config.js
+!./apps/website/assets/js/*.js
+!./apps/website/assets/js/vendor/*.js

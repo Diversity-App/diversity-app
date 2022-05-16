@@ -29,7 +29,10 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint src/**/*.ts",
         "format": "prettier --write '**/*.{ts,json}'",
-        "dev": "npx nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec npx ts-node src/index.ts",
+        "generate": "npx prisma generate",
+        "postgenerate": "npx prisma db push",
+        "predev": "npm run generate",
+        "dev": "npx nodemon --watch index.ts --ignore 'src/**/*.spec.ts' --exec npx ts-node src/index.ts",
         "start": "node src/index.js",
         "build": "tsc --build --verbose "
     },
@@ -44,6 +47,7 @@
     },
     "homepage": "https://github.com/Diversity-App/backend#readme",
     "dependencies": {
+        "@prisma/client": "^3.14.0",
         "axios": "^0.24.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
