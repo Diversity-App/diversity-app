@@ -1,16 +1,15 @@
 import React, { memo, useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { nameValidator, passwordValidator } from '../core/utils';
-import { Navigation, User, StringError, HTTPRequest } from '../types';
+import { HTTPRequest, Navigation, StringError, User } from '../types';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
-import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
+import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 
 type Props = {
     navigation: Navigation;
@@ -28,7 +27,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
         value: password.value,
         setValue: setValue,
     });
-    const [error, setError] = useState<string>('');
+    const [error, $setError] = useState<string>('');
 
     const _onLoginPressed = () => {
         // tmp code
@@ -49,7 +48,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             password: password.value,
         };
 
-        const config: HTTPRequest = {
+        const $config: HTTPRequest = {
             url: 'http://localhost:8080/auth/login',
             data: value,
         };
@@ -63,7 +62,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
         //         setError('Login Error');
         //         console.log(error);
         //     });
-
     };
 
     return (
@@ -75,6 +73,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
                 placeholder="Name"
                 inputStyle={{ color: 'white' }}
                 onChangeText={(text) => setName({ value: text, error: 'error' })}
+                autoCompleteType={undefined}
             />
             <CodeField
                 ref={ref}

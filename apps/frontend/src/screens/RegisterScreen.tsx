@@ -1,12 +1,12 @@
 import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
-import { Navigation, User, StringError, HTTPRequest } from '../types';
-import { passwordValidator, nameValidator } from '../core/utils';
+import { HTTPRequest, Navigation, StringError, User } from '../types';
+import { nameValidator, passwordValidator } from '../core/utils';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
@@ -21,7 +21,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
     const [password, setPassword] = useState<StringError>({ value: '', error: '' });
     const CELL_COUNT: number = 4;
     const [enableMask, setEnableMask] = useState<boolean>(true);
-    const [value, setValue] = useState<string>('');
+    const [$value, setValue] = useState<string>('');
     const ref = useBlurOnFulfill({ value: password.value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
         value: password.value,
@@ -93,6 +93,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
                 inputStyle={{ color: 'white' }}
                 value={generatedUserName}
                 disabled={true}
+                autoCompleteType={undefined}
             />
             <Button
                 color={'black'}
