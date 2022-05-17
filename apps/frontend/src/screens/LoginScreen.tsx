@@ -104,6 +104,7 @@ const LoginScreen = ({ navigation }: Props) => {
                 placeholder="Name"
                 inputStyle={{ color: 'white' }}
                 onChangeText={(text) => setName({ value: text, error: 'error' })}
+                autoCompleteType={undefined}
             />
             <CodeField
                 ref={ref}

@@ -10,3 +10,7 @@ dist
 !*.config.js
 !./apps/website/assets/js/*.js
 !./apps/website/assets/js/vendor/*.js
+
+# Ruby / CocoaPods
+/ios/Pods/
+/vendor/bundle/
