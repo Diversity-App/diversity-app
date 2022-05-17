@@ -1,15 +1,26 @@
 import { checkPassword, generateToken, hashPassword } from '../../tools/auth.tools';
 import { Request, Response } from 'express';
-import Pool from '../../tools/database.tools';
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export default class AuthController {
     static async register(req: Request, res: Response) {
         try {
             const { username, password } = req.body;
 
-            const query = `INSERT INTO "Users" (username, password) VALUES($1, $2);`;
+            // const query = `INSERT INTO "Users" (username, password)
+            //                VALUES ($1, $2);`;
+            //
+            // await Pool.query(query, [username, hashPassword(password)]);
 
-            await Pool.query(query, [username, hashPassword(password)]);
+            await prisma.users.create({
+                data: {
+                    username,
+                    password: hashPassword(password),
+                },
+            });
 
             res.status(201).json({
                 status: 'success',
@@ -28,9 +39,14 @@ export default class AuthController {
         try {
             const { username, password } = req.body;
 
-            const query = `SELECT * FROM "Users" WHERE username = $1;`;
-
-            const [user] = (await Pool.query(query, [username])).rows;
+            // const query = `SELECT * FROM "Users" WHERE username = $1;`;
+            //
+            // const [user] = (await Pool.query(query, [username])).rows;
+            const user = await prisma.users.findFirst({
+                where: {
+                    username,
+                },
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -46,9 +62,7 @@ export default class AuthController {
                 });
             }
 
-            const token = generateToken(user);
-
-            delete user.password;
+            const token = generateToken({ id: user.id });
 
             res.status(200)
                 .cookie('API_TOKEN', token, {
@@ -59,7 +73,6 @@ export default class AuthController {
                     status: 'success',
                     data: {
                         token,
-                        user,
                     },
                 });
         } catch (e) {

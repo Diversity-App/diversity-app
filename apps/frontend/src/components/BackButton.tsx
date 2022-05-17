@@ -6,6 +6,12 @@ type Props = {
     goBack: () => void;
 };
 
+const BackButton: React.FC<Props> = ({ goBack }: Props) => (
+    <TouchableOpacity onPress={goBack} style={styles.container}>
+        <Image style={styles.image} source={require('../assets/arrow_back.png')} />
+    </TouchableOpacity>
+);
+
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
@@ -17,11 +23,5 @@ const styles = StyleSheet.create({
         height: 24,
     },
 });
-
-const BackButton = ({ goBack }: Props) => (
-    <TouchableOpacity onPress={goBack} style={styles.container}>
-        <Image style={styles.image} source={require('../assets/arrow_back.png')} />
-    </TouchableOpacity>
-);
 
 export default memo(BackButton);

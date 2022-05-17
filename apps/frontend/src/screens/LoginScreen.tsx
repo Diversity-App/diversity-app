@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { nameValidator, passwordValidator } from '../core/utils';
-import { Navigation } from '../types';
+import { HTTPRequest, Navigation, StringError, User } from '../types';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
@@ -15,55 +15,27 @@ type Props = {
     navigation: Navigation;
 };
 
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        marginTop: 4,
-    },
-    label: {
-        color: theme.colors.secondary,
-    },
-    link: {
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
-    root: { flex: 1, padding: 20 },
-    title: { textAlign: 'center', fontSize: 30 },
-    codeFieldRoot: { marginTop: 20 },
-    cell: {
-        width: 60,
-        height: 60,
-        lineHeight: 55,
-        fontSize: 24,
-        borderWidth: 2,
-        borderColor: '#eee',
-        margin: 5,
-        textAlign: 'center',
-        borderRadius: 5,
-    },
-    focusCell: {
-        borderColor: '#000',
-    },
-});
-
-const LoginScreen = ({ navigation }: Props) => {
-    const [name, setName] = useState({ value: '', error: '' });
-    const [password, setPassword] = useState({ value: '', error: '' });
-    const [enableMask, setEnableMask] = useState(true);
+const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
+    const [name, setName] = useState<StringError>({ value: '', error: '' });
+    const [password, setPassword] = useState<StringError>({ value: '', error: '' });
+    const [enableMask, setEnableMask] = useState<boolean>(true);
     const CELL_COUNT = 4;
     const toggleMask = () => setEnableMask((f) => !f);
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<string>('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
         value: password.value,
         setValue: setValue,
     });
-    const [error, $setError] = useState('');
+    const [error, $setError] = useState<string>('');
 
     const _onLoginPressed = () => {
+        // tmp code
+        navigation.navigate('Dashboard');
+
         console.log(password.value, ' => ', name.value);
-        const nameError = nameValidator(name.value);
-        const passwordError = passwordValidator(password.value);
+        const nameError: string = nameValidator(name.value);
+        const passwordError: string = passwordValidator(password.value);
 
         if (passwordError || nameError) {
             setName({ ...name, error: nameError });
@@ -71,28 +43,25 @@ const LoginScreen = ({ navigation }: Props) => {
             return;
         }
 
-        const data = {
+        const value: User = {
             username: name.value,
             password: password.value,
         };
 
-        const $config = {
-            method: 'post',
+        const $config: HTTPRequest = {
             url: 'http://localhost:8080/auth/login',
-            data: data,
+            data: value,
         };
 
-        // axios(config)
-        //     .then(function (response) {
+        // axios.post(config.url, config.data)
+        //     .then((response: AxiosResponse) => {
         //         console.log(JSON.stringify(response.data.data.token));
         //         navigation.navigate('Dashboard');
         //     })
-        //     .catch(function (error) {
+        //     .catch((error: AxiosError) => {
         //         setError('Login Error');
         //         console.log(error);
         //     });
-
-        navigation.navigate('Dashboard');
     };
 
     return (
@@ -167,5 +136,36 @@ const LoginScreen = ({ navigation }: Props) => {
         </Background>
     );
 };
+
+const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        marginTop: 4,
+    },
+    label: {
+        color: theme.colors.secondary,
+    },
+    link: {
+        fontWeight: 'bold',
+        color: theme.colors.primary,
+    },
+    root: { flex: 1, padding: 20 },
+    title: { textAlign: 'center', fontSize: 30 },
+    codeFieldRoot: { marginTop: 20 },
+    cell: {
+        width: 60,
+        height: 60,
+        lineHeight: 55,
+        fontSize: 24,
+        borderWidth: 2,
+        borderColor: '#eee',
+        margin: 5,
+        textAlign: 'center',
+        borderRadius: 5,
+    },
+    focusCell: {
+        borderColor: '#000',
+    },
+});
 
 export default memo(LoginScreen);
