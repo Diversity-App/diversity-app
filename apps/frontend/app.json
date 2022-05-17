@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "diversity_app",
-    "slug": "diversity_app",
+    "name": "mobile",
+    "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,18 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.diversity.app"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "scheme": "music-dashboard"
+      "favicon": "./src/assets/favicon.png"
+    }
   }
 }

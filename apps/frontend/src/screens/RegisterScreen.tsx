@@ -137,6 +137,7 @@ const RegisterScreen = ({ navigation }: Props) => {
                 inputStyle={{ color: 'white' }}
                 value={generatedUserName}
                 disabled={true}
+                autoCompleteType={undefined}
             />
             <Button
                 color={'black'}
