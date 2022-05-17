@@ -9,7 +9,8 @@
   ],
   "nohoist": [
     "**react-native**",
-    "react-native"
+    "react-native",
+    "expo"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
