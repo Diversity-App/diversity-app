@@ -1,32 +1,3 @@
-// const path = require('path');
-//
-// module.exports = {
-//     watchFolders: [
-//         path.resolve(__dirname, '../../packages/ui'),
-//         path.resolve(__dirname, '../../packages/global'),
-//         path.resolve(__dirname, '../../packages/services'),
-//     ],
-//     transformer: {
-//         getTransformOptions: async () => ({
-//             transform: {
-//                 experimentalImportSupport: false,
-//                 inlineRequires: false,
-//             },
-//         }),
-//     },
-//     resolver: {
-//         extraNodeModules: new Proxy(
-//             {},
-//             {
-//                 get: (target, name) => {
-//                     return path.join(process.cwd(), 'node_modules', name);
-//                 },
-//             },
-//         ),
-//     },
-//     projectRoot: path.resolve(__dirname),
-// };
-
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
 const path = require('path');
