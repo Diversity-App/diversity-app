@@ -85,7 +85,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
 
     return (
         <Background>
-            <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+            <BackButton goBack={() => navigation.navigate('LandingScreen')} />
             <Logo />
             <Header>Create Account.</Header>
             <Input
