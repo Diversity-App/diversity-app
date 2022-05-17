@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --passWithNoTests",
+    "test": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --passWithNoTests",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
