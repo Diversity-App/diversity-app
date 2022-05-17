@@ -17,7 +17,7 @@ model SSO_Tokens {
   id            Int           @id(map: "pk_sso_tokens") @default(autoincrement())
   user_id       Int
   provider_id   Int
-  client_id     String        @db.VarChar(255)
+  client_id     String        @db.VarChar(255) @unique
   access_token  String        @db.VarChar(255)
   refresh_token String?       @db.VarChar(255)
   expires_in    Int?

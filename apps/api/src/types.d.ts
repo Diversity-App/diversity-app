@@ -50,11 +50,9 @@ export interface StatSummary {
 
 export interface User {
     id: number;
-    uuid: string;
-    name: string;
-    username: string;
-    created_at: string;
-    updated_at: string;
+    uuid?: string;
+    name?: string;
+    username?: string;
 }
 
 export abstract class SSOTools {
