@@ -6,6 +6,14 @@ type Props = {
     children: React.ReactNode;
 };
 
+const Background: React.FC<Props> = ({ children }: Props) => (
+    <View style={styles.background}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+            {children}
+        </KeyboardAvoidingView>
+    </View>
+);
+
 const styles = StyleSheet.create({
     background: {
         flex: 1,
@@ -22,13 +30,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
-const Background = ({ children }: Props) => (
-    <View style={styles.background}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-            {children}
-        </KeyboardAvoidingView>
-    </View>
-);
 
 export default memo(Background);

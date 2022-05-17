@@ -5,6 +5,9 @@ import { theme } from '../core/theme';
 type Props = {
     children: React.ReactNode;
 };
+
+const Header: React.FC<Props> = ({ children }: Props) => <Text style={styles.header}>{children}</Text>;
+
 const styles = StyleSheet.create({
     header: {
         fontSize: 26,
@@ -13,7 +16,5 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
     },
 });
-
-const Header = ({ children }: Props) => <Text style={styles.header}>{children}</Text>;
 
 export default memo(Header);

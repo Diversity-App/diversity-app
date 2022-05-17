@@ -3,10 +3,6 @@ import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import { Button } from 'react-native-paper';
-// import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import Button from '../components/Button';
-// import {FloatingLabelInput} from 'react-native-floating-label-input';
 import Paragraph from '../components/Paragraph';
 import { Navigation } from '../types';
 
@@ -14,7 +10,7 @@ type Props = {
     navigation: Navigation;
 };
 
-const HomeScreen = ({ navigation }: Props) => (
+const HomeScreen: React.FC<Props> = ({ navigation }: Props) => (
     <Background>
         <Logo />
         <Header>Diversity</Header>
