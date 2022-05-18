@@ -1,0 +1,31 @@
+{
+  "schemas": {
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "message"
+      ]
+    },
+    "LoginRequest": {
+      "$ref": "./auth/auth.components.json#/schemas/LoginRequest"
+    },
+    "LoginResponse": {
+      "$ref": "./auth/auth.components.json#/schemas/LoginResponse"
+    },
+    "RegisterRequest": {
+      "$ref": "./auth/auth.components.json#/schemas/RegisterRequest"
+    },
+    "RegisterResponse": {
+      "$ref": "./auth/auth.components.json#/schemas/RegisterResponse"
+    }
+  }
+}

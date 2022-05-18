@@ -1,4 +1,4 @@
-import { StatItem, StatSummary } from '../types';
+import { StatItem, StatSummary } from '../types.d';
 
 export default class StatsTool {
     static summarize(stats: StatItem[]): StatSummary {

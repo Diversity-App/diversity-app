@@ -1,5 +1,5 @@
 import { Playlist, Video } from './types';
-import { StatItem } from '../../types';
+import { StatItem } from '../../types.d';
 
 export default class StatsTool {
     static parseVideoStats(video: Video): StatItem {

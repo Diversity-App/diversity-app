@@ -1,4 +1,4 @@
-import { SSOController, SSOTools, Token, User } from '../../../../types';
+import { SSOController, SSOTools, Token, User } from '../../../../types.d';
 import { Request, Response } from 'express';
 import SsoTool from '../../../../tools/sso.tool';
 import dotenv from 'dotenv';
@@ -13,30 +13,6 @@ export default class GoogleController implements SSOController, SSOTools {
     private static redirectUrl: string = process.env.GOOGLE_REDIRECT_URL || '';
     private static scope: string = process.env.GOOGLE_SCOPE || '';
     private static state: string = process.env.GOOGLE_STATE || '';
-
-    private static async fetchUser(token: string): Promise<User & any> {
-        const res = await axios(`https://www.googleapis.com/oauth2/v3/userinfo`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return await res.data;
-    }
-
-    private static async fetchToken(code: string): Promise<Token & any> {
-        const body = {
-            code: code,
-            client_id: GoogleController.clientId,
-            client_secret: GoogleController.clientSecret,
-            redirect_uri: "https://auth.expo.io/@area1234/diversity_app", // change @ to your expo account, will be changed to ngrok
-            grant_type: 'authorization_code',
-        };
-
-        const res = await axios(`https://www.googleapis.com/oauth2/v4/token?${new URLSearchParams(body).toString()}`, {
-            method: 'POST',
-        });
-        return await res.data;
-    }
 
     public static async getCode(req: Request, res: Response): Promise<void> {
         try {
@@ -79,7 +55,7 @@ export default class GoogleController implements SSOController, SSOTools {
                 return;
             }
             const token = await GoogleController.fetchToken(code);
-            console.log(token)
+            console.log(token);
 
             const providerUser = await GoogleController.fetchUser(token.access_token);
             console.log(providerUser);
@@ -97,5 +73,29 @@ export default class GoogleController implements SSOController, SSOTools {
                 error: 'Internal server error',
             });
         }
+    }
+
+    private static async fetchUser(token: string): Promise<User & any> {
+        const res = await axios(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return await res.data;
+    }
+
+    private static async fetchToken(code: string): Promise<Token & any> {
+        const body = {
+            code: code,
+            client_id: GoogleController.clientId,
+            client_secret: GoogleController.clientSecret,
+            redirect_uri: 'https://auth.expo.io/@area1234/diversity_app', // change @ to your expo account, will be changed to ngrok
+            grant_type: 'authorization_code',
+        };
+
+        const res = await axios(`https://www.googleapis.com/oauth2/v4/token?${new URLSearchParams(body).toString()}`, {
+            method: 'POST',
+        });
+        return await res.data;
     }
 }

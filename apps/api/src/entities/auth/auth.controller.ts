@@ -1,41 +1,40 @@
 import { checkPassword, generateToken, hashPassword } from '../../tools/auth.tools';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import { PrismaClient } from '@prisma/client';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../../../../shared/services';
+import { ApiError } from '../../types';
 
 const prisma = new PrismaClient();
 
 export default class AuthController {
-    static async register(req: Request, res: Response) {
+    static async register(req: Request<RegisterRequest>, res: Response<RegisterResponse>, next: NextFunction) {
         try {
             const { username, password } = req.body;
 
-            // const query = `INSERT INTO "Users" (username, password)
-            //                VALUES ($1, $2);`;
-            //
-            // await Pool.query(query, [username, hashPassword(password)]);
-
-            await prisma.users.create({
+            const user = await prisma.users.create({
                 data: {
                     username,
                     password: hashPassword(password),
                 },
             });
+            const token = generateToken({ id: user.id });
 
             res.status(201).json({
                 status: 'success',
                 message: 'User created successfully',
+                data: {
+                    token,
+                },
             });
         } catch (e) {
-            console.log(e);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error registering user',
-            });
+            if (e.code === 'P2002') {
+                next(new ApiError(400, 'Username already exists'));
+            } else next(e);
         }
     }
 
-    static async login(req: Request, res: Response) {
+    static async login(req: Request<LoginRequest>, res: Response<LoginResponse>, next: NextFunction) {
         try {
             const { username, password } = req.body;
 
@@ -49,17 +48,11 @@ export default class AuthController {
             });
 
             if (!user) {
-                return res.status(404).json({
-                    status: 'error',
-                    message: 'User not found',
-                });
+                throw new ApiError(401, 'Invalid credentials');
             }
 
             if (!checkPassword(password, user.password)) {
-                return res.status(401).json({
-                    status: 'error',
-                    message: 'Password does not match',
-                });
+                throw new ApiError(401, 'Invalid credentials');
             }
 
             const token = generateToken({ id: user.id });
@@ -71,16 +64,13 @@ export default class AuthController {
                 })
                 .json({
                     status: 'success',
+                    message: 'User logged in successfully',
                     data: {
                         token,
                     },
                 });
         } catch (e) {
-            console.log(e);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error logging in user',
-            });
+            next(e);
         }
     }
 }

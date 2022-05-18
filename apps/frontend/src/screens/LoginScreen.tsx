@@ -10,6 +10,7 @@ import { HTTPRequest, Navigation, StringError, User } from '../types';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
+import { ApiClient, ApiResponse } from '../../../../shared/services';
 
 type Props = {
     navigation: Navigation;
@@ -28,6 +29,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
         setValue: setValue,
     });
     const [error, $setError] = useState<string>('');
+
+    const apiClient = new ApiClient();
 
     const _onLoginPressed = () => {
         // tmp code
@@ -53,15 +56,16 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             data: value,
         };
 
-        // axios.post(config.url, config.data)
-        //     .then((response: AxiosResponse) => {
-        //         console.log(JSON.stringify(response.data.data.token));
-        //         navigation.navigate('Dashboard');
-        //     })
-        //     .catch((error: AxiosError) => {
-        //         setError('Login Error');
-        //         console.log(error);
-        //     });
+        apiClient.auth
+            .postAuthLogin({
+                ...value,
+            })
+            .then(({ message, data, status }) => {
+                console.log(message, data, status);
+            })
+            .catch(({ body: { status, message } }: ApiClient & { body: ApiResponse }) => {
+                console.log(status, message);
+            });
     };
 
     return (

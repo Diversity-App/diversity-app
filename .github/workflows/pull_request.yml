@@ -7,19 +7,15 @@ jobs:
   lint:
     needs: [ install ]
     uses: Diversity-App/diversity-app/.github/workflows/lint_job.yml@main
-  #  openapi:
-  #    needs: [ install ]
-  #    uses: Diversity-App/diversity-app/.github/workflows/openapi_job.yml@main
+  openapi:
+    needs: [ install ]
+    uses: Diversity-App/diversity-app/.github/workflows/openapi_job.yml@main
   prisma:
     needs: [ install ]
     uses: Diversity-App/diversity-app/.github/workflows/prisma_job.yml@main
   compile:
-    needs: [ lint, prisma
-      #      , openapi,
-    ]
+    needs: [ lint, prisma, openapi ]
     uses: Diversity-App/diversity-app/.github/workflows/compile_job.yml@main
   test:
-    needs: [ lint, compile, prisma
-      #      , openapi,
-    ]
+    needs: [ lint, compile, prisma, openapi ]
     uses: Diversity-App/diversity-app/.github/workflows/test_job.yml@main

@@ -48,6 +48,8 @@ export interface StatSummary {
     categoriesRatio: Array<{ name: string; count: number }>;
 }
 
+
+
 export interface User {
     id: number;
     uuid?: string;

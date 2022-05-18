@@ -1,0 +1,40 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Title",
+    "description": "Title",
+    "version": "3.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/v1"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "$ref": "./auth/auth.path.json#/register"
+    },
+    "/auth/login": {
+      "$ref": "./auth/auth.path.json#/login"
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiResponse": {
+        "$ref": "./openapi.components.json#/schemas/ApiResponse"
+      },
+      "LoginRequest": {
+        "$ref": "./auth/auth.components.json#/schemas/LoginRequest"
+      },
+      "LoginResponse": {
+        "$ref": "./auth/auth.components.json#/schemas/LoginResponse"
+      },
+      "RegisterRequest": {
+        "$ref": "./auth/auth.components.json#/schemas/RegisterRequest"
+      },
+      "RegisterResponse": {
+        "$ref": "./auth/auth.components.json#/schemas/RegisterResponse"
+      }
+    }
+  }
+}

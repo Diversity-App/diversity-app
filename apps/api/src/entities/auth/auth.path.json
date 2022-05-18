@@ -1,0 +1,80 @@
+{
+  "register": {
+    "post": {
+      "tags": [
+        "Auth"
+      ],
+      "description": "Register a new user",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../openapi.components.json#/schemas/RegisterRequest"
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "User created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/RegisterResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/ApiResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "login": {
+    "post": {
+      "tags": [
+        "Auth"
+      ],
+      "description": "Login a user",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../openapi.components.json#/schemas/LoginRequest"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "User logged in",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/LoginResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/ApiResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
