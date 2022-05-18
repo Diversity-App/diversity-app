@@ -34,11 +34,12 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                     backgroundColor: 'white',
                     justifyContent: 'center',
                 }}
-                onPress={() => navigation.navigate('HomeScreen')}>
-                Log In
+                onPress={() => navigation.navigate('Settings')}>
+                Settings
             </Button>
         </Background>
     );
+    // }
 };
 
 export default memo(Dashboard);
