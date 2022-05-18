@@ -27,23 +27,6 @@ declare module 'express-session' {
 dotenv.config();
 
 const app = express();
-
-app.use(
-    OpenApiValidator.middleware({
-        apiSpec: openApiDocument,
-        validateRequests: {
-            removeAdditional: 'all',
-            allowUnknownQueryParameters: false,
-            coerceTypes: false,
-        },
-        ignoreUndocumented: true,
-        validateResponses: {
-            removeAdditional: 'all',
-        },
-        validateFormats: 'full',
-    }),
-);
-
 app.use(session(sessionConfig));
 
 app.use(bodyParser.json());
@@ -54,11 +37,28 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
+app.use(
+    OpenApiValidator.middleware({
+        apiSpec: openApiDocument,
+        validateRequests: {
+            removeAdditional: 'all',
+            allowUnknownQueryParameters: false,
+            coerceTypes: false,
+        },
+        ignoreUndocumented: true,
+        // validateResponses: {
+        //     removeAdditional: 'all',
+        // },
+        validateFormats: 'full',
+    }),
+);
+
 app.use('/v1/', routes);
 
 // login all requests
 
 app.use((err: any, req: Request, res: Response, $next: NextFunction) => {
+    console.log(err);
     res.status(err.status || 500).json({
         message: err.message,
         status: 'failed',

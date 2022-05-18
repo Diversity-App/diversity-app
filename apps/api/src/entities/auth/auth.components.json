@@ -33,7 +33,7 @@
             }
           },
           "required": [
-            "token"
+            "data"
           ]
         }
       ]
@@ -67,11 +67,14 @@
                 "token": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "token"
+              ]
             }
           },
           "required": [
-            "token"
+            "data"
           ]
         }
       ]

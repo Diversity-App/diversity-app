@@ -5,7 +5,7 @@
 import type { ApiResponse } from './ApiResponse';
 
 export type RegisterResponse = (ApiResponse & {
-    data?: {
-        token?: string;
+    data: {
+        token: string;
     };
 });

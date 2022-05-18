@@ -1,12 +1,13 @@
 import { checkPassword, generateToken, hashPassword } from '../../tools/auth.tools';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import { PrismaClient } from '@prisma/client';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../../../../shared/services';
 
 const prisma = new PrismaClient();
 
 export default class AuthController {
-    static async register(req: Request, res: Response) {
+    static async register(req: Request<RegisterRequest>, res: Response<RegisterResponse>, next: NextFunction) {
         try {
             const { username, password } = req.body;
 
@@ -26,15 +27,11 @@ export default class AuthController {
                 },
             });
         } catch (e) {
-            console.log(e);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error registering user',
-            });
+            next(e);
         }
     }
 
-    static async login(req: Request, res: Response) {
+    static async login(req: Request<LoginRequest>, res: Response<LoginResponse>, next: NextFunction) {
         try {
             const { username, password } = req.body;
 
@@ -48,17 +45,11 @@ export default class AuthController {
             });
 
             if (!user) {
-                return res.status(404).json({
-                    status: 'error',
-                    message: 'User not found',
-                });
+                throw new Error('User not found');
             }
 
             if (!checkPassword(password, user.password)) {
-                return res.status(401).json({
-                    status: 'error',
-                    message: 'Password does not match',
-                });
+                throw new Error('Invalid password');
             }
 
             const token = generateToken({ id: user.id });
@@ -76,11 +67,7 @@ export default class AuthController {
                     },
                 });
         } catch (e) {
-            console.log(e);
-            res.status(500).json({
-                status: 'error',
-                message: 'Error logging in user',
-            });
+            next(e);
         }
     }
 }

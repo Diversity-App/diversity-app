@@ -27,8 +27,12 @@
         },
         "400": {
           "description": "Invalid request",
-          "schema": {
-            "$ref": "../openapi.components.json#/schemas/ApiResponse"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/ApiResponse"
+              }
+            }
           }
         }
       }
@@ -62,8 +66,12 @@
         },
         "400": {
           "description": "Invalid request",
-          "schema": {
-            "$ref": "../openapi.components.json#/schemas/ApiResponse"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/ApiResponse"
+              }
+            }
           }
         }
       }

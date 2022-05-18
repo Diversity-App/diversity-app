@@ -39,8 +39,12 @@
           },
           "400": {
             "description": "Invalid request",
-            "schema": {
-              "$ref": "#/components/schemas/ApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
             }
           }
         }
@@ -74,8 +78,12 @@
           },
           "400": {
             "description": "Invalid request",
-            "schema": {
-              "$ref": "#/components/schemas/ApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
             }
           }
         }
@@ -132,7 +140,7 @@
               }
             },
             "required": [
-              "token"
+              "data"
             ]
           }
         ]
@@ -166,11 +174,14 @@
                   "token": {
                     "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "token"
+                ]
               }
             },
             "required": [
-              "token"
+              "data"
             ]
           }
         ]
