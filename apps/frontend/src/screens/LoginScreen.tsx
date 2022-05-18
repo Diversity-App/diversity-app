@@ -31,7 +31,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
 
     const _onLoginPressed = () => {
         // tmp code
-        navigation.navigate('Dashboard');
+        navigation.navigate('Home');
 
         console.log(password.value, ' => ', name.value);
         const nameError: string = nameValidator(name.value);
@@ -66,7 +66,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
 
     return (
         <Background>
-            <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+            <BackButton goBack={() => navigation.navigate('LandingScreen')} />
             <Logo />
             <Header>Welcome back.</Header>
             <Input
