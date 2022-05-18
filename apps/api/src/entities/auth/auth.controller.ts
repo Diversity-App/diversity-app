@@ -10,11 +10,6 @@ export default class AuthController {
         try {
             const { username, password } = req.body;
 
-            // const query = `INSERT INTO "Users" (username, password)
-            //                VALUES ($1, $2);`;
-            //
-            // await Pool.query(query, [username, hashPassword(password)]);
-
             const user = await prisma.users.create({
                 data: {
                     username,

@@ -1,6 +1,9 @@
 {
   "register": {
     "post": {
+      "tags": [
+        "Auth"
+      ],
       "description": "Register a new user",
       "requestBody": {
         "content": {
@@ -33,6 +36,9 @@
   },
   "login": {
     "post": {
+      "tags": [
+        "Auth"
+      ],
       "description": "Login a user",
       "requestBody": {
         "content": {
