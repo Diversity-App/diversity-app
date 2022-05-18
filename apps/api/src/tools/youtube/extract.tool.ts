@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Token, youtubeVideo } from '../../types';
+import { Token, youtubeVideo } from '../../types.d';
 
 async function extractVideoProperties(videoId: string, youtubeToken: Token): Promise<youtubeVideo> {
     const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {

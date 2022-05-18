@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "types:bundle": "npx swagger-cli bundle -o ./shared/generated/openapi-v1.json apps/api/src/entities/openapi.index.json",
-    "types:generate": "openapi -i shared/generated/openapi-v1.json -o shared/services --client axios --name ApiClient --useUnionTypes --exportCore false",
+    "types:generate": "openapi -i shared/generated/openapi-v1.json -o shared/services --client axios --name ApiClient --useUnionTypes",
     "services:generate": "npm run types:bundle && npm run types:generate",
     "validate:swagger": "npx swagger-cli validate ./shared/generated/openapi-v1.json",
     "validate:prisma": "npx prisma format --schema ./apps/api/prisma/schema.prisma"

@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import { PrismaClient } from '@prisma/client';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../../../../shared/services';
+import { ApiError } from '../../types';
 
 const prisma = new PrismaClient();
 
@@ -27,7 +28,9 @@ export default class AuthController {
                 },
             });
         } catch (e) {
-            next(e);
+            if (e.code === 'P2002') {
+                next(new ApiError(400, 'Username already exists'));
+            } else next(e);
         }
     }
 
@@ -45,11 +48,11 @@ export default class AuthController {
             });
 
             if (!user) {
-                throw new Error('User not found');
+                throw new ApiError(401, 'Invalid credentials');
             }
 
             if (!checkPassword(password, user.password)) {
-                throw new Error('Invalid password');
+                throw new ApiError(401, 'Invalid credentials');
             }
 
             const token = generateToken({ id: user.id });

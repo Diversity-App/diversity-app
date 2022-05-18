@@ -1,4 +1,4 @@
-import { Token } from '../types';
+import { Token } from '../types.d';
 
 import { PrismaClient } from '@prisma/client';
 

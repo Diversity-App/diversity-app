@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import routes from './entities/routes';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import { User } from './types';
+import { User } from './types.d';
 import cookieParser from 'cookie-parser';
 
 import configuration from '../configuration';

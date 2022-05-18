@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import SsoTool from '../../tools/sso.tool';
-import { Token } from '../../types';
+import { Token } from '../../types.d';
 import YoutubeApiWrapper from '../../tools/youtube/api.tool';
 import YoutubeStatsTool from '../../tools/youtube/stats.tool';
 import StatsTool from '../../tools/stats.tool';
