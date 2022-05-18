@@ -28,7 +28,7 @@ app.use(session(sessionConfig));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(routes);
+app.use('/v1/', routes);
 
 // login all requests
 app.use((req: Request, res: Response, next: NextFunction) => {

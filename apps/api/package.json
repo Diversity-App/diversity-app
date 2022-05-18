@@ -32,9 +32,9 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write '**/*.{ts,json}'",
-    "generate": "npx prisma generate",
-    "postgenerate": "npx prisma db push",
-    "predev": "npm run generate",
+    "generate:db": "npx prisma generate",
+    "postgenerate:db": "npx prisma db push",
+    "predev": "npm run generate:db",
     "dev": "npx nodemon --watch index.ts --ignore 'src/**/*.spec.ts' --exec npx ts-node src/index.ts",
     "start": "node src/index.js",
     "build": "tsc --build --verbose "

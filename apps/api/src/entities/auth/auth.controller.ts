@@ -15,16 +15,20 @@ export default class AuthController {
             //
             // await Pool.query(query, [username, hashPassword(password)]);
 
-            await prisma.users.create({
+            const user = await prisma.users.create({
                 data: {
                     username,
                     password: hashPassword(password),
                 },
             });
+            const token = generateToken({ id: user.id });
 
             res.status(201).json({
                 status: 'success',
                 message: 'User created successfully',
+                data: {
+                    token,
+                },
             });
         } catch (e) {
             console.log(e);
@@ -71,6 +75,7 @@ export default class AuthController {
                 })
                 .json({
                     status: 'success',
+                    message: 'User logged in successfully',
                     data: {
                         token,
                     },
