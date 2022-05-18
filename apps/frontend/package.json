@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --passWithNoTests",
+    "test": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --passWithNoTests --detectOpenHandles",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
@@ -81,6 +81,10 @@
     ],
     "transform": {
       "\\.[jt]sx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
     }
   }
 }
