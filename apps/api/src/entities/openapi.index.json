@@ -16,6 +16,12 @@
     },
     "/auth/login": {
       "$ref": "./auth/auth.path.json#/login"
+    },
+    "/data/stats": {
+      "$ref": "./data/data.path.json#/stats"
+    },
+    "/data/homePage": {
+      "$ref": "./data/data.path.json#/homePage"
     }
   },
   "components": {
@@ -34,6 +40,18 @@
       },
       "RegisterResponse": {
         "$ref": "./auth/auth.components.json#/schemas/RegisterResponse"
+      },
+      "StatItem": {
+        "$ref": "./data/data.components.json#/schemas/StatItem"
+      },
+      "StatSummary": {
+        "$ref": "./data/data.components.json#/schemas/StatSummary"
+      },
+      "HomepageResponse": {
+        "$ref": "./data/data.components.json#/schemas/HomepageResponse"
+      },
+      "StatsResponse": {
+        "$ref": "./data/data.components.json#/schemas/StatsResponse"
       }
     }
   }

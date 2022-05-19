@@ -26,6 +26,18 @@
     },
     "RegisterResponse": {
       "$ref": "./auth/auth.components.json#/schemas/RegisterResponse"
+    },
+    "StatItem": {
+      "$ref": "./data/data.components.json#/schemas/StatItem"
+    },
+    "StatSummary": {
+      "$ref": "./data/data.components.json#/schemas/StatSummary"
+    },
+    "HomepageResponse": {
+      "$ref": "./data/data.components.json#/schemas/HomepageResponse"
+    },
+    "StatsResponse": {
+      "$ref": "./data/data.components.json#/schemas/StatsResponse"
     }
   }
 }
