@@ -19,10 +19,12 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
             <AnimatedCircularProgress
                 size={120}
                 width={15}
-                fill={49}
+                fill={33}
                 tintColor="#00e0ff"
                 onAnimationComplete={() => console.log('onAnimationComplete')}
                 backgroundColor="#3d5875"
+                rotation={0}
+                lineCap="round"
             />
             <Button
                 color={'black'}

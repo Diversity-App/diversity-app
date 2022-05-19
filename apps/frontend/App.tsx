@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 import LandingScreen from './src/screens/LandingScreen';
 import LoginScreen from './src/screens/LoginScreen';
@@ -14,7 +15,17 @@ const Stack = createStackNavigator();
 
 function HomeTabs() {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => {
+                    if (route.name === 'Dashboard') {
+                        return <Ionicons name={'ios-home-outline'} size={size} color={color} />;
+                    } else if (route.name === 'Settings') {
+                        return <Ionicons name={'ios-settings-outline'} size={size} color={color} />;
+                    }
+                },
+            })}>
             <Tab.Screen name="Dashboard" component={Dashboard} />
             <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
