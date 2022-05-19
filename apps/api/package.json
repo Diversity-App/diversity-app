@@ -29,7 +29,7 @@
     "typescript": "^4.6.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --passWithNoTests --detectOpenHandles",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write '**/*.{ts,json}'",
     "generate:db": "npx prisma generate",

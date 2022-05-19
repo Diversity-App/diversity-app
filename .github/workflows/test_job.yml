@@ -26,3 +26,8 @@ jobs:
           node-version: '16'
       - run: npm run test
         working-directory: ${{ matrix.directories }}
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        name: Generate coverage report
+        with:
+          skip-step: all
+          coverage-file: ${{ matrix.directories }}/report.json
