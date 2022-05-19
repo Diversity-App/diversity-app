@@ -7,3 +7,6 @@ pgdata
 dist
 !.prettierrc.js
 *.map
+
+report.json
+coverage
