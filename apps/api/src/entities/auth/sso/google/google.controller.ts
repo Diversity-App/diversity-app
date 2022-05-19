@@ -1,41 +1,27 @@
-import { SSOController, SSOTools, Token, User } from '../../../../types.d';
-import { Request, Response } from 'express';
+import { SSOController, SSOTools } from '../../../../types.d';
+import { NextFunction, Request, Response } from 'express';
 import SsoTool from '../../../../tools/sso.tool';
-import dotenv from 'dotenv';
-import axios from 'axios';
-
-dotenv.config();
+import GoogleService from './google.service';
 
 export default class GoogleController implements SSOController, SSOTools {
-    private static clientId: string = process.env.GOOGLE_CLIENT_ID || '';
-    private static clientSecret: string = process.env.GOOGLE_CLIENT_SECRET || '';
-    private static callbackUrl: string = process.env.GOOGLE_CALLBACK_URL || '';
-    private static redirectUrl: string = process.env.GOOGLE_REDIRECT_URL || '';
-    private static scope: string = process.env.GOOGLE_SCOPE || '';
-    private static state: string = process.env.GOOGLE_STATE || '';
-
-    public static async getCode(req: Request, res: Response): Promise<void> {
+    public static async getCode(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const params = {
-                client_id: GoogleController.clientId,
-                redirect_uri: GoogleController.redirectUrl,
-                scope: GoogleController.scope,
-                state: GoogleController.state,
+                client_id: GoogleService.clientId,
+                redirect_uri: GoogleService.redirectUrl,
+                scope: GoogleService.scope,
+                state: GoogleService.state,
                 response_type: 'code',
                 prompt: 'consent',
             };
             const url = `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(params).toString()}`;
             res.redirect(url);
         } catch (e) {
-            console.log(e);
-            res.status(500).send({
-                status: 'error',
-                error: 'Internal server error',
-            });
+            next(e);
         }
     }
 
-    public static async getToken(req: Request, res: Response): Promise<void> {
+    public static async getToken(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { code } = req.query;
             if (!code || typeof code !== 'string') {
@@ -54,10 +40,10 @@ export default class GoogleController implements SSOController, SSOTools {
                 });
                 return;
             }
-            const token = await GoogleController.fetchToken(code);
+            const token = await GoogleService.fetchToken(code);
             console.log(token);
 
-            const providerUser = await GoogleController.fetchUser(token.access_token);
+            const providerUser = await GoogleService.fetchUser(token.access_token);
             console.log(providerUser);
 
             await SsoTool.syncUserToken(user.id, providerUser.sub, 'Google', token);
@@ -67,35 +53,7 @@ export default class GoogleController implements SSOController, SSOTools {
                 token: token.access_token,
             });
         } catch (e) {
-            console.log(e);
-            res.status(500).send({
-                status: 'error',
-                error: 'Internal server error',
-            });
+            next(e);
         }
-    }
-
-    private static async fetchUser(token: string): Promise<User & any> {
-        const res = await axios(`https://www.googleapis.com/oauth2/v3/userinfo`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return await res.data;
-    }
-
-    private static async fetchToken(code: string): Promise<Token & any> {
-        const body = {
-            code: code,
-            client_id: GoogleController.clientId,
-            client_secret: GoogleController.clientSecret,
-            redirect_uri: 'https://auth.expo.io/@area1234/diversity_app', // change @ to your expo account, will be changed to ngrok
-            grant_type: 'authorization_code',
-        };
-
-        const res = await axios(`https://www.googleapis.com/oauth2/v4/token?${new URLSearchParams(body).toString()}`, {
-            method: 'POST',
-        });
-        return await res.data;
     }
 }
