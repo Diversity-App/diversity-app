@@ -40,7 +40,7 @@ export const verifyToken = (req: any, res: any, next: any) => {
     try {
         const decoded = jwt.verify(access_token, JWT_SECRET);
         if (typeof decoded != 'string' && decoded.id) {
-            req.session.user = decoded;
+            req.user = decoded;
             next();
         } else {
             return res.status(401).send({

@@ -5,19 +5,17 @@ import YoutubeApiWrapper from '../../tools/youtube/api.tool';
 import YoutubeStatsTool from '../../tools/youtube/stats.tool';
 import StatsTool from '../../tools/stats.tool';
 import { HomepageResponse, StatsResponse } from '../../../../../shared/services';
+import { ApiError } from '../../types';
 
 export default class DataController {
     static async getStats(req: Request, res: Response<StatsResponse>, next: NextFunction) {
         //get id from params
         try {
-            const { user } = req.session;
-            if (!user) {
-                return res.redirect('/auth/login');
-            }
+            const { user } = req;
 
             const youtubeToken: Token = await SsoTool.getProviderToken(user.id, 'Google');
             if (!youtubeToken) {
-                return res.redirect('/auth/sso/google/login');
+                throw new ApiError(401, 'You must be logged in to access this page');
             }
             const stats = [
                 YoutubeApiWrapper.getLikedPlaylist(youtubeToken.access_token),
@@ -41,15 +39,13 @@ export default class DataController {
 
     static async getHomePage(req: Request, res: Response<HomepageResponse>, next: NextFunction) {
         try {
-            const { user } = req.session;
-            if (!user) {
-                return res.redirect('/auth/login');
-            }
+            const { user } = req;
 
             const youtubeToken: Token = await SsoTool.getProviderToken(user.id, 'Google');
             if (!youtubeToken) {
-                return res.redirect('/auth/sso/google/login');
+                throw new ApiError(401, 'You must be logged in to access this page');
             }
+
             const data = await YoutubeApiWrapper.getUserHomepage(youtubeToken.access_token);
             const stats = YoutubeStatsTool.parsePlaylistStats(data);
             const summary = StatsTool.summarize(stats);
