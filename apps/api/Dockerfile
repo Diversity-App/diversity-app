@@ -6,4 +6,4 @@ WORKDIR /app
 
 RUN npm install
 
-CMD ["node", "../../dist/apps/api/app.js"]
+CMD ["node", "src/index.ts"]
