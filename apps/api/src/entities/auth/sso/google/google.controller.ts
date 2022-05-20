@@ -1,6 +1,7 @@
 import { SSOController, SSOTools } from '../../../../types.d';
 import { NextFunction, Request, Response } from 'express';
 import SsoTool from '../../../../tools/sso.tool';
+
 import GoogleService from './google.service';
 
 export default class GoogleController implements SSOController, SSOTools {

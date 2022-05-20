@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
-dotenv.config();
+if (dotenv) dotenv.config();
+else console.log('Dotenv broke ?');
 
 export default {
     OPENAPI_SPEC_DEFINITION: process.env.OPENAPI_SPEC_DEFINITION ?? '../../../shared/generated/openapi-v1.json',
@@ -10,4 +11,6 @@ export default {
     GOOGLE_REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL ?? '',
     GOOGLE_SCOPE: process.env.GOOGLE_SCOPE ?? '',
     GOOGLE_STATE: process.env.GOOGLE_STATE ?? '',
+    JWT_SECRET: process.env.JWT_SECRET ?? '',
+    NODE_ENV: process.env.NODE_ENV ?? 'development',
 };
