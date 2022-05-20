@@ -24,8 +24,6 @@ jobs:
       - uses: actions/setup-node@v2.4.1
         with:
           node-version: '16'
-      - run: npx prisma generate
-        if: ${{ matrix.directories }} == 'apps/api'
       - run: npm run test
         working-directory: ${{ matrix.directories }}
       - uses: ArtiomTr/jest-coverage-report-action@v2
