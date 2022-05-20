@@ -24,6 +24,12 @@ declare module 'express-session' {
     }
 }
 
+declare module 'express' {
+    export interface Request {
+        user: User;
+    }
+}
+
 dotenv.config();
 
 const app = express();
@@ -52,6 +58,10 @@ app.use(
         validateFormats: 'full',
     }),
 );
+
+app.get('/ping', (req: Request, res: Response) => {
+    res.sendStatus(200);
+});
 
 app.use('/v1/', routes);
 

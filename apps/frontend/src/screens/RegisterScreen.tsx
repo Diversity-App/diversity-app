@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -10,7 +10,7 @@ import { nameValidator, passwordValidator } from '../core/utils';
 import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { ApiClient } from '../../../../shared/services';
 
 type Props = {
     navigation: Navigation;
@@ -27,9 +27,10 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
         value: password.value,
         setValue: setValue,
     });
-    const [error, setError] = useState<string>('');
     const [generatedUserName, setGeneratedUserName] = useState<string>('');
     const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
+    const apiClient = new ApiClient();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const userNameGenerator = () => {
         const newGeneratedUsername: string = uniqueNamesGenerator({
@@ -48,6 +49,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
         if (nameError) {
             console.log('nameError');
         } else if (passwordError) {
+            console.log('passwordError');
             console.log('passWord');
         }
 
@@ -55,6 +57,8 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
             setName({ ...name, error: nameError });
             setPassword({ ...password, error: passwordError });
             return;
+        } else {
+            setLoading(true);
         }
 
         const value: User = {
@@ -65,110 +69,120 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
         console.log(name.value);
         console.log(password.value);
 
-        const config: HTTPRequest = {
+        const $config: HTTPRequest = {
             url: 'http://localhost:8080/auth/register',
             data: value,
         };
 
-        axios
-            .post(config.url, config.data)
-            .then((response: AxiosResponse) => {
-                console.log(JSON.stringify(response.data));
-                navigation.navigate('Dashboard');
+        apiClient.auth
+            .postAuthRegister({
+                ...value,
             })
-            .catch((error: AxiosError) => {
-                setError('Register Error');
+            .then((response) => {
+                console.log(response);
+                navigation.navigate('Home');
+            })
+            .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     };
     const toggleMask = () => setEnableMask((f) => !f);
 
-    return (
-        <Background>
-            <BackButton goBack={() => navigation.navigate('LandingScreen')} />
-            <Logo />
-            <Header>Create Account.</Header>
-            <Input
-                placeholder="Generate a Username"
-                inputStyle={{ color: 'white' }}
-                value={generatedUserName}
-                disabled={true}
-                autoCompleteType={undefined}
-            />
-            <Button
-                color={'black'}
-                style={{
-                    margin: 10,
-                    borderRadius: 10,
-                    width: 250,
-                    height: 50,
-                    backgroundColor: 'white',
-                    justifyContent: 'center',
-                }}
-                onPress={userNameGenerator}>
-                Generate my username
-            </Button>
-            <CodeField
-                ref={ref}
-                {...props}
-                // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
-                value={password.value}
-                onChangeText={(text) => setPassword({ value: text, error: 'NameError' })}
-                cellCount={CELL_COUNT}
-                rootStyle={styles.codeFieldRoot}
-                keyboardType="number-pad"
-                textContentType="oneTimeCode"
-                renderCell={({ index, symbol, isFocused }) => {
-                    let textChild = null;
+    if (loading) {
+        return (
+            <Background>
+                <ActivityIndicator size="large" />
+            </Background>
+        );
+    } else {
+        return (
+            <Background>
+                <BackButton goBack={() => navigation.navigate('LandingScreen')} />
+                <Logo />
+                <Header>Create Account.</Header>
+                <Input
+                    placeholder="Generate a Username"
+                    inputStyle={{ color: 'white' }}
+                    value={generatedUserName}
+                    disabled={true}
+                    autoCompleteType={undefined}
+                />
+                <Button
+                    color={'black'}
+                    style={{
+                        margin: 10,
+                        borderRadius: 10,
+                        width: 250,
+                        height: 50,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                    }}
+                    onPress={userNameGenerator}>
+                    Generate my username
+                </Button>
+                <CodeField
+                    ref={ref}
+                    {...props}
+                    // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                    value={password.value}
+                    onChangeText={(text) => setPassword({ value: text, error: '' })}
+                    cellCount={CELL_COUNT}
+                    rootStyle={styles.codeFieldRoot}
+                    keyboardType="number-pad"
+                    textContentType="oneTimeCode"
+                    renderCell={({ index, symbol, isFocused }) => {
+                        let textChild = null;
 
-                    if (symbol) textChild = enableMask ? '\u2B24' : symbol;
+                        if (symbol) textChild = enableMask ? '\u2B24' : symbol;
 
-                    return (
-                        <Text
-                            key={index}
-                            style={[styles.cell, isFocused && styles.focusCell]}
-                            onLayout={getCellOnLayoutHandler(index)}>
-                            {textChild}
-                        </Text>
-                    );
-                }}
-            />
-            <Button
-                color={'black'}
-                style={{
-                    margin: 20,
-                    borderRadius: 25,
-                    width: 150,
-                    height: 50,
-                    backgroundColor: 'white',
-                    justifyContent: 'center',
-                }}
-                onPress={toggleMask}>
-                {enableMask ? 'View Code' : 'Hide code'}
-            </Button>
+                        return (
+                            <Text
+                                key={index}
+                                style={[styles.cell, isFocused && styles.focusCell]}
+                                onLayout={getCellOnLayoutHandler(index)}>
+                                {textChild}
+                            </Text>
+                        );
+                    }}
+                />
+                <Button
+                    color={'black'}
+                    style={{
+                        margin: 20,
+                        borderRadius: 25,
+                        width: 150,
+                        height: 50,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                    }}
+                    onPress={toggleMask}>
+                    {enableMask ? 'View Code' : 'Hide code'}
+                </Button>
 
-            <Button
-                color={'black'}
-                style={{
-                    margin: 10,
-                    borderRadius: 25,
-                    width: 150,
-                    height: 50,
-                    backgroundColor: 'white',
-                    justifyContent: 'center',
-                }}
-                onPress={_onSignUpPressed}>
-                Sign Up
-            </Button>
-            <Text>{error}</Text>
-            <View style={styles.row}>
-                <Text style={styles.label}>Already have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-                    <Text style={styles.link}>Login</Text>
-                </TouchableOpacity>
-            </View>
-        </Background>
-    );
+                <Button
+                    color={'black'}
+                    style={{
+                        margin: 10,
+                        borderRadius: 25,
+                        width: 150,
+                        height: 50,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                    }}
+                    onPress={_onSignUpPressed}>
+                    Sign Up
+                </Button>
+                {password.error ? <Text style={{ color: 'red' }}>{password.error}</Text> : null}
+                <View style={styles.row}>
+                    <Text style={styles.label}>Already have an account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+                        <Text style={styles.link}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+            </Background>
+        );
+    }
 };
 
 const styles = StyleSheet.create({
