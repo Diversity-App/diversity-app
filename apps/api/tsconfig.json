@@ -10,7 +10,8 @@
     "types": [
       "node",
       "jest"
-    ]
+    ],
+    "noEmit": true
   },
   "compileOnSave": false,
   "include": [
