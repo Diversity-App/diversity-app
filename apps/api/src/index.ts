@@ -66,6 +66,8 @@ app.use((err: any, req: Request, res: Response, $next: NextFunction) => {
     });
 });
 
+export const server = app;
+
 app.listen(8080, () => {
     console.log('Listening on port 8080');
 });
