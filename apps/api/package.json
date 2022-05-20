@@ -37,14 +37,14 @@
     "typescript": "^4.6.4"
   },
   "scripts": {
-    "pretest": "npm run generate:db",
+    "pretest": "npx prisma generate",
     "test": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --passWithNoTests --detectOpenHandles",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write '**/*.{ts,json}'",
     "generate:db": "npx prisma generate",
     "postgenerate:db": "npx prisma db push",
     "predev": "npm run generate:db",
-    "dev": "npx nodemon --watch index.ts --ignore 'src/**/*.spec.ts' --exec npx ts-node src/index.ts",
+    "dev": "npx nodemon index.ts",
     "start": "node src/index.js",
     "build": "tsc --build --verbose "
   },

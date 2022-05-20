@@ -11,4 +11,6 @@ export default {
     GOOGLE_REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL ?? '',
     GOOGLE_SCOPE: process.env.GOOGLE_SCOPE ?? '',
     GOOGLE_STATE: process.env.GOOGLE_STATE ?? '',
+    JWT_SECRET: process.env.JWT_SECRET ?? '',
+    NODE_ENV: process.env.NODE_ENV ?? 'development',
 };
