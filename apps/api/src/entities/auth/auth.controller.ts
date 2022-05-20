@@ -1,11 +1,9 @@
 import { checkPassword, generateToken, hashPassword } from '../../tools/auth.tools';
 import { NextFunction, Request, Response } from 'express';
-
-import { PrismaClient } from '@prisma/client';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../../../../shared/services';
 import { ApiError } from '../../types';
 
-const prisma = new PrismaClient();
+import prisma from '../../tools/prisma';
 
 export default class AuthController {
     static async register(req: Request<RegisterRequest>, res: Response<RegisterResponse>, next: NextFunction) {
@@ -17,7 +15,11 @@ export default class AuthController {
                     username,
                     password: hashPassword(password),
                 },
+                select: {
+                    id: true,
+                },
             });
+            console.log(user);
             const token = generateToken({ id: user.id });
 
             res.status(201).json({
@@ -47,6 +49,7 @@ export default class AuthController {
                 },
             });
 
+            console.log(user);
             if (!user) {
                 throw new ApiError(401, 'Invalid credentials');
             }

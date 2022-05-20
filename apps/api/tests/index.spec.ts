@@ -1,4 +1,5 @@
 import supertest from 'supertest';
+import './mocks';
 
 import app from '../src/app';
 

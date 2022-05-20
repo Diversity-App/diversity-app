@@ -14,10 +14,6 @@
     "noEmit": true
   },
   "compileOnSave": false,
-  "include": [
-    "src/**/*",
-    "test/**/*"
-  ],
   "exclude": [
     "node_modules/**",
     "../../node_modules/**",
