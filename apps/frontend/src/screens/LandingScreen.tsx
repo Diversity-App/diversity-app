@@ -43,6 +43,19 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                 onPress={() => navigation.navigate('RegisterScreen')}>
                 Sign Up
             </Button>
+            <Button
+                style={{
+                    margin: 10,
+                    borderRadius: 25,
+                    width: 150,
+                    height: 50,
+                    backgroundColor: 'white',
+                    justifyContent: 'center',
+                }}
+                color={'black'}
+                onPress={() => navigation.navigate('Home')}>
+                Dev
+            </Button>
         </Background>
     );
 };
