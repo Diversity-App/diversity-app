@@ -14,9 +14,84 @@ type Props = {
 const LogoHeader = () => <Image source={require('../assets/logo_blanc.png')} style={styles.image} />;
 
 const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
+    const dataArray = [
+        {
+            id: 1,
+            title: 'Sport',
+            icon: 'ios-football',
+            percentage: '50%',
+        },
+        {
+            id: 2,
+            title: 'Culture',
+            icon: 'ios-musical-notes',
+            percentage: '50%',
+        },
+        {
+            id: 3,
+            title: 'Politique',
+            icon: 'ios-flag',
+            percentage: '50%',
+        },
+        {
+            id: 4,
+            title: 'Economie',
+            icon: 'ios-cash',
+            percentage: '50%',
+        },
+        {
+            id: 5,
+            title: 'Sport',
+            icon: 'ios-football',
+            percentage: '50%',
+        },
+        {
+            id: 6,
+            title: 'Culture',
+            icon: 'ios-musical-notes',
+            percentage: '50%',
+        },
+        {
+            id: 7,
+            title: 'Politique',
+            icon: 'ios-flag',
+            percentage: '50%',
+        },
+        {
+            id: 8,
+            title: 'Economie',
+            icon: 'ios-cash',
+            percentage: '50%',
+        },
+        {
+            id: 9,
+            title: 'Sport',
+            icon: 'ios-football',
+            percentage: '50%',
+        },
+        {
+            id: 10,
+            title: 'Culture',
+            icon: 'ios-musical-notes',
+            percentage: '50%',
+        },
+        {
+            id: 11,
+            title: 'Politique',
+            icon: 'ios-flag',
+            percentage: '50%',
+        },
+        {
+            id: 12,
+            title: 'Economie',
+            icon: 'ios-cash',
+            percentage: '50%',
+        },
+    ];
+
     return (
         // <Background>
-        <View style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
+        <ScrollView style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
             <View style={styles.header}>
                 <LogoHeader />
                 <Text style={styles.stat}>Statistics</Text>
@@ -44,46 +119,85 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                 <View style={styles.line} />
                 <Text style={styles.actualityTexte}>Actuality :</Text>
                 <ScrollView horizontal={true} style={styles.actuality}>
-                    <Text>teeeeeeeeeeeeeeeeest </Text>
-                    <Text>teeeeeeeeeeeeeeeeest </Text>
+                    {dataArray.map((item) => (
+                        <View key={item.id}>
+                            <Pressable style={styles.actualityButton} onPress={() => navigation.navigate('Home')}>
+                                <Ionicons name={item.icon} size={30} />
+                            </Pressable>
+                        </View>
+                    ))}
                 </ScrollView>
-                <ScrollView horizontal={true} style={{ position: 'absolute', marginTop: 600, alignSelf: 'center' }}>
-                    <Text>teeeeeeeeeeeeeeeeest </Text>
-                    <Text>teeeeeeeeeeeeeeeeest </Text>
+                <ScrollView horizontal={true} style={{ alignSelf: 'center', marginTop: 30 }}>
+                    {dataArray.map((item) => (
+                        <View
+                            key={item.id}
+                            style={{
+                                marginLeft: 25,
+                                borderRadius: 7,
+                                backgroundColor: '#fff',
+                                width: 240,
+                                height: 240,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}>
+                            <Text
+                                style={{
+                                    fontSize: 35,
+                                    fontWeight: '700',
+                                }}>
+                                {item.title}
+                            </Text>
+                            <Ionicons name={item.icon} size={60} />
+                            <Text
+                                style={{
+                                    fontSize: 35,
+                                    fontWeight: '700',
+                                }}>
+                                {item.percentage}
+                            </Text>
+                        </View>
+                    ))}
                 </ScrollView>
             </View>
-        </View>
+        </ScrollView>
         // </Background>
     );
     // }
 };
 
 const styles = StyleSheet.create({
+    actualityButton: {
+        backgroundColor: 'white',
+        borderRadius: 40,
+        width: 70,
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 15,
+        // marginLeft: 15,
+    },
     actualityTexte: {
         fontSize: 30,
         fontWeight: '700',
         color: 'white',
-        marginTop: 105,
+        marginTop: 130,
         marginLeft: 10,
         lineHeight: 45,
     },
     actuality: {
-        position: 'absolute',
-        marginTop: 500,
+        // position: 'absolute',
+        marginTop: 10,
         alignSelf: 'center',
     },
     backGround: {
         backgroundColor: theme.colors.surface,
     },
     scoreValue: {
-        // position: 'absolute',
         fontWeight: '700',
         fontSize: 40,
         color: 'white',
         lineHeight: 45,
-        // marginBottom: 200,
-        // top: -380,
-        marginTop: -125,
+        marginTop: -150,
         alignSelf: 'center',
     },
     header: {
