@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Title",
-    "description": "Title",
+    "title": "Diversity Application API",
+    "description": "Diversity Application API",
     "version": "3.0.0"
   },
   "servers": [
@@ -16,6 +16,12 @@
     },
     "/auth/login": {
       "$ref": "./auth/auth.path.json#/login"
+    },
+    "/auth/sso/google/login": {
+      "$ref": "./auth/sso/google/google.path.json#/login"
+    },
+    "/auth/sso/google/callback": {
+      "$ref": "./auth/sso/google/google.path.json#/callback"
     },
     "/data/stats": {
       "$ref": "./data/data.path.json#/stats"
@@ -52,6 +58,9 @@
       },
       "StatsResponse": {
         "$ref": "./data/data.components.json#/schemas/StatsResponse"
+      },
+      "GoogleCallbackResponse": {
+        "$ref": "./auth/sso/google/google.components.json#/schemas/GoogleCallbackResponse"
       }
     }
   }

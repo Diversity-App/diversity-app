@@ -89,6 +89,49 @@
         }
       }
     },
+    "/auth/sso/google/login": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Get the login page",
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect to login page"
+          }
+        }
+      }
+    },
+    "/auth/sso/google/callback": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Consent screen callback, returns token",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Authorization code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Redirect to login page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoogleCallbackResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/data/stats": {
       "get": {
         "description": "Get the stats",
@@ -370,6 +413,21 @@
             "required": [
               "data"
             ]
+          }
+        ]
+      },
+      "GoogleCallbackResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ApiResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string"
+              }
+            }
           }
         ]
       }

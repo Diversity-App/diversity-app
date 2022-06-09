@@ -10,6 +10,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { ApiResponse } from './models/ApiResponse';
+export type { GoogleCallbackResponse } from './models/GoogleCallbackResponse';
 export type { HomepageResponse } from './models/HomepageResponse';
 export type { LoginRequest } from './models/LoginRequest';
 export type { LoginResponse } from './models/LoginResponse';
@@ -21,3 +22,4 @@ export type { StatSummary } from './models/StatSummary';
 
 export { AuthService } from './services/AuthService';
 export { DataService } from './services/DataService';
+export { SsoService } from './services/SsoService';

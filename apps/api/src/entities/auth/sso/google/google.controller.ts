@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from 'express';
 import SsoTool from '../../../../tools/sso.tool';
 
 import GoogleService from './google.service';
+import { GoogleCallbackResponse } from '../../../../../../../shared/services';
+import { ApiError } from '../../../../types';
 
 export default class GoogleController implements SSOController, SSOTools {
     public static async getCode(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -22,24 +24,29 @@ export default class GoogleController implements SSOController, SSOTools {
         }
     }
 
-    public static async getToken(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public static async getToken(
+        req: Request<{ code: string }>,
+        res: Response<GoogleCallbackResponse>,
+        next: NextFunction,
+    ): Promise<void> {
         try {
             const { code } = req.query;
             if (!code || typeof code !== 'string') {
-                res.status(400).send({
-                    status: 'error',
-                    error: 'Bad request',
-                });
-                return;
+                // res.status(400).send({
+                //     status: 'error',
+                //     error: 'Bad request',
+                // });
+                throw new ApiError(400, 'Bad request');
             }
 
             const { user } = req.session;
             if (!user) {
-                res.status(401).send({
-                    status: 'error',
-                    error: 'Unauthorized',
-                });
-                return;
+                // res.status(401).send({
+                //     status: 'error',
+                //     error: 'Unauthorized',
+                // });
+                // return;
+                throw new ApiError(401, 'Unauthorized');
             }
             const token = await GoogleService.fetchToken(code);
             console.log(token);
@@ -50,6 +57,7 @@ export default class GoogleController implements SSOController, SSOTools {
             await SsoTool.syncUserToken(user.id, providerUser.sub, 'Google', token);
 
             res.json({
+                message: 'Authentication successful',
                 status: 'success',
                 token: token.access_token,
             });
