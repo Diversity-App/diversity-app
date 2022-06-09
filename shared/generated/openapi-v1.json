@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Title",
-    "description": "Title",
+    "title": "Diversity Application API",
+    "description": "Diversity Application API",
     "version": "3.0.0"
   },
   "servers": [
@@ -82,6 +82,51 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/sso/google/login": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Get the login page",
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect to login page"
+          }
+        }
+      }
+    },
+    "/auth/sso/google/callback": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Consent screen callback, returns token",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Authorization code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Redirect to login page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoogleCallbackResponse"
                 }
               }
             }
@@ -370,6 +415,21 @@
             "required": [
               "data"
             ]
+          }
+        ]
+      },
+      "GoogleCallbackResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ApiResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string"
+              }
+            }
           }
         ]
       }
