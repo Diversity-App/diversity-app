@@ -6,12 +6,16 @@ import type { OpenAPIConfig } from './core/OpenAPI';
 import { AxiosHttpRequest } from './core/AxiosHttpRequest';
 
 import { AuthService } from './services/AuthService';
+import { DataService } from './services/DataService';
+import { SsoService } from './services/SsoService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
 
     public readonly auth: AuthService;
+    public readonly data: DataService;
+    public readonly sso: SsoService;
 
     public readonly request: BaseHttpRequest;
 
@@ -29,5 +33,7 @@ export class ApiClient {
         });
 
         this.auth = new AuthService(this.request);
+        this.data = new DataService(this.request);
+        this.sso = new SsoService(this.request);
     }
 }

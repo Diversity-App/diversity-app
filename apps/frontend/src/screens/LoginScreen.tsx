@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -28,14 +28,12 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
         value: password.value,
         setValue: setValue,
     });
-    const [error, $setError] = useState<string>('');
-
+    const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const apiClient = new ApiClient();
 
     const _onLoginPressed = () => {
         // tmp code
-        navigation.navigate('Home');
-
         console.log(password.value, ' => ', name.value);
         const nameError: string = nameValidator(name.value);
         const passwordError: string = passwordValidator(password.value);
@@ -44,6 +42,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             setName({ ...name, error: nameError });
             setPassword({ ...password, error: passwordError });
             return;
+        } else {
+            setLoading(true);
         }
 
         const value: User = {
@@ -62,83 +62,102 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             })
             .then(({ message, data, status }) => {
                 console.log(message, data, status);
+                navigation.navigate('Home');
             })
             .catch(({ body: { status, message } }: ApiClient & { body: ApiResponse }) => {
                 console.log(status, message);
+                setLoading(false);
+                setError(message);
             });
     };
 
-    return (
-        <Background>
-            <BackButton goBack={() => navigation.navigate('LandingScreen')} />
-            <Logo />
-            <Header>Welcome back.</Header>
-            <Input
-                placeholder="Name"
-                inputStyle={{ color: 'white' }}
-                onChangeText={(text) => setName({ value: text, error: 'error' })}
-                autoCompleteType={undefined}
-            />
-            <CodeField
-                ref={ref}
-                {...props}
-                // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
-                value={password.value}
-                onChangeText={(text) => setPassword({ value: text, error: 'NameError' })}
-                cellCount={CELL_COUNT}
-                rootStyle={styles.codeFieldRoot}
-                keyboardType="number-pad"
-                textContentType="oneTimeCode"
-                renderCell={({ index, symbol, isFocused }) => {
-                    let textChild = null;
+    if (loading) {
+        return (
+            <Background>
+                <ActivityIndicator size="large" />
+            </Background>
+        );
+    } else {
+        return (
+            <Background>
+                <BackButton goBack={() => navigation.navigate('LandingScreen')} />
+                <Logo />
+                <Header>Welcome back.</Header>
+                <Input
+                    placeholder="Name"
+                    inputStyle={{ color: 'white' }}
+                    onChangeText={(text) => {
+                        setName({ value: text, error: '' });
+                        setError('');
+                    }}
+                    autoCompleteType={undefined}
+                />
+                {name.error ? <Text style={{ color: 'red' }}>{name.error}</Text> : null}
+                <CodeField
+                    ref={ref}
+                    {...props}
+                    // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                    value={password.value}
+                    onChangeText={(text) => {
+                        setPassword({ value: text, error: '' });
+                        setError('');
+                    }}
+                    cellCount={CELL_COUNT}
+                    rootStyle={styles.codeFieldRoot}
+                    keyboardType="number-pad"
+                    textContentType="oneTimeCode"
+                    renderCell={({ index, symbol, isFocused }) => {
+                        let textChild = null;
 
-                    if (symbol) textChild = enableMask ? '\u2B24' : symbol;
+                        if (symbol) textChild = enableMask ? '\u2B24' : symbol;
 
-                    return (
-                        <Text
-                            key={index}
-                            style={[styles.cell, isFocused && styles.focusCell]}
-                            onLayout={getCellOnLayoutHandler(index)}>
-                            {textChild}
-                        </Text>
-                    );
-                }}
-            />
-            <Button
-                color={'black'}
-                style={{
-                    margin: 10,
-                    borderRadius: 25,
-                    width: 150,
-                    height: 50,
-                    backgroundColor: 'white',
-                    justifyContent: 'center',
-                }}
-                onPress={toggleMask}>
-                {enableMask ? 'View Code' : 'Hide code'}
-            </Button>
-            <Button
-                color={'black'}
-                style={{
-                    margin: 10,
-                    borderRadius: 25,
-                    width: 150,
-                    height: 50,
-                    backgroundColor: 'white',
-                    justifyContent: 'center',
-                }}
-                onPress={_onLoginPressed}>
-                Log In
-            </Button>
-            <Text>{error}</Text>
-            <View style={styles.row}>
-                <Text style={styles.label}>Don’t have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-                    <Text style={styles.link}>Sign up</Text>
-                </TouchableOpacity>
-            </View>
-        </Background>
-    );
+                        return (
+                            <Text
+                                key={index}
+                                style={[styles.cell, isFocused && styles.focusCell]}
+                                onLayout={getCellOnLayoutHandler(index)}>
+                                {textChild}
+                            </Text>
+                        );
+                    }}
+                />
+                <Button
+                    color={'black'}
+                    style={{
+                        margin: 10,
+                        borderRadius: 25,
+                        width: 150,
+                        height: 50,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                    }}
+                    onPress={toggleMask}>
+                    {enableMask ? 'View Code' : 'Hide code'}
+                </Button>
+                <Button
+                    color={'black'}
+                    style={{
+                        margin: 10,
+                        borderRadius: 25,
+                        width: 150,
+                        height: 50,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                    }}
+                    onPress={_onLoginPressed}>
+                    Log In
+                </Button>
+                {password.error ? <Text style={{ color: 'red' }}>{password.error}</Text> : null}
+                {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
+                <View style={styles.row}>
+                    <Text style={styles.label}>Don’t have an account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+                        <Text style={styles.link}>Sign up</Text>
+                    </TouchableOpacity>
+                </View>
+            </Background>
+        );
+    }
 };
 
 const styles = StyleSheet.create({

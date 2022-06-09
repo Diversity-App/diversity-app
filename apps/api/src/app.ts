@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import dotenv from 'dotenv';
+
 import routes from './entities/routes';
 import bodyParser from 'body-parser';
 import session from 'express-session';
@@ -13,10 +13,10 @@ const openApiDocument = require(configuration.OPENAPI_SPEC_DEFINITION);
 
 const sessionConfig = {
     user: {},
-    secret: process.env.COOKIE_SECRET || 'secret',
+    secret: configuration.JWT_SECRET || 'secret',
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === 'production' },
+    cookie: { secure: configuration.NODE_ENV === 'production' },
 };
 declare module 'express-session' {
     export interface SessionData {
@@ -24,7 +24,11 @@ declare module 'express-session' {
     }
 }
 
-dotenv.config();
+declare module 'express' {
+    export interface Request {
+        user: User;
+    }
+}
 
 const app = express();
 app.use(session(sessionConfig));
@@ -53,6 +57,10 @@ app.use(
     }),
 );
 
+app.get('/ping', (req: Request, res: Response) => {
+    res.sendStatus(200);
+});
+
 app.use('/v1/', routes);
 
 // login all requests
@@ -66,6 +74,4 @@ app.use((err: any, req: Request, res: Response, $next: NextFunction) => {
     });
 });
 
-app.listen(8080, () => {
-    console.log('Listening on port 8080');
-});
+export default app;

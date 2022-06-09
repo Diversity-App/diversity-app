@@ -3,6 +3,7 @@ import Background from '../components/Background';
 import { Navigation } from '../types';
 import Paragraph from '../components/Paragraph';
 import { Button } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native';
 
 type Props = {
     navigation: Navigation;
@@ -11,6 +12,7 @@ type Props = {
 const Settings: React.FC<Props> = ({ navigation }: Props) => {
     return (
         <Background>
+            <ActivityIndicator size="large" />
             <Paragraph>Settings screen</Paragraph>
             <Button
                 color={'black'}
