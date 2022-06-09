@@ -25,7 +25,9 @@
           "in": "query",
           "description": "Authorization code",
           "required": true,
-          "type": "string"
+          "schema": {
+            "type": "string"
+          }
         }
       ],
       "responses": {

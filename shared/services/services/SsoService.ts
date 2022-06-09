@@ -32,7 +32,7 @@ export class SsoService {
      * @throws ApiError
      */
     public getAuthSsoGoogleCallback(
-        code: any,
+        code: string,
     ): CancelablePromise<GoogleCallbackResponse> {
         return this.httpRequest.request({
             method: 'GET',

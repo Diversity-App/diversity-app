@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Title",
-    "description": "Title",
+    "title": "Diversity Application API",
+    "description": "Diversity Application API",
     "version": "3.0.0"
   },
   "servers": [
@@ -115,7 +115,9 @@
             "in": "query",
             "description": "Authorization code",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
