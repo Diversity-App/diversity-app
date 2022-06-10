@@ -121,7 +121,15 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                 <ScrollView horizontal={true} style={styles.actuality}>
                     {dataArray.map((item) => (
                         <View key={item.id}>
-                            <Pressable style={styles.actualityButton} onPress={() => navigation.navigate('Home')}>
+                            <Pressable
+                                style={styles.actualityButton}
+                                onPress={() => {
+                                    /* 1. Navigate to the Details route with params */
+                                    navigation.navigate('DetailsScreen', {
+                                        itemId: item.id,
+                                        itemName: item.title,
+                                    });
+                                }}>
                                 <Ionicons name={item.icon} size={30} />
                             </Pressable>
                         </View>
@@ -129,7 +137,14 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                 </ScrollView>
                 <ScrollView horizontal={true} style={{ alignSelf: 'center', marginTop: 30 }}>
                     {dataArray.map((item) => (
-                        <View
+                        <Pressable
+                            onPress={() => {
+                                /* 1. Navigate to the Details route with params */
+                                navigation.navigate('DetailsScreen', {
+                                    itemId: item.id,
+                                    itemName: item.title,
+                                });
+                            }}
                             key={item.id}
                             style={{
                                 marginLeft: 25,
@@ -155,7 +170,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                 }}>
                                 {item.percentage}
                             </Text>
-                        </View>
+                        </Pressable>
                     ))}
                 </ScrollView>
             </View>
