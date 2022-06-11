@@ -62,7 +62,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             })
             .then(({ message, data, status }) => {
                 console.log(message, data, status);
-                navigation.navigate('Home');
+                navigation.navigate('Home', {});
             })
             .catch(({ body: { status, message } }: ApiClient & { body: ApiResponse }) => {
                 console.log(status, message);
@@ -80,7 +80,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
     } else {
         return (
             <Background>
-                <BackButton goBack={() => navigation.navigate('LandingScreen')} />
+                <BackButton goBack={() => navigation.navigate('LandingScreen', {})} />
                 <Logo />
                 <Header>Welcome back.</Header>
                 <Input
@@ -151,7 +151,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
                 {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
                 <View style={styles.row}>
                     <Text style={styles.label}>Don’t have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen', {})}>
                         <Text style={styles.link}>Sign up</Text>
                     </TouchableOpacity>
                 </View>

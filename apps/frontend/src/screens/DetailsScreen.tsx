@@ -118,12 +118,12 @@ const Details: React.FC<Props> = ({ route, navigation }: Props) => {
                     <LogoHeader />
                     <Text style={styles.stat}>{itemName}</Text>
                     <View style={[{ flexDirection: 'row', marginLeft: '170%', position: 'absolute' }]}>
-                        <Pressable style={[styles.headerButton]} onPress={() => navigation.navigate('Home')}>
+                        <Pressable style={[styles.headerButton]} onPress={() => navigation.navigate('Home', {})}>
                             <Ionicons name={'ios-home-outline'} size={25} />
                         </Pressable>
                         <Pressable
                             style={[styles.headerButton, { marginLeft: 15 }]}
-                            onPress={() => navigation.navigate('Settings')}>
+                            onPress={() => navigation.navigate('Settings', {})}>
                             <Ionicons name={'ios-settings-outline'} size={25} />
                         </Pressable>
                     </View>
