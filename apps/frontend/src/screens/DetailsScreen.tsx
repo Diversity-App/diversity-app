@@ -11,7 +11,14 @@ type Props = {
     route: any;
 };
 
-const LogoHeader = () => <Image source={require('../assets/logo_blanc.png')} style={styles.image} />;
+const LogoHeader = () => (
+    <Image source={require('../assets/logo_blanc.png')} style={[styles.image, { marginBottom: 12, marginLeft: 15 }]} />
+);
+const InstaLogo = () => <Image source={require('../assets/instagram_logo.png')} style={styles.image} />;
+const TiktokLogo = () => <Image source={require('../assets/tikTok_logo.png')} style={styles.image} />;
+const YoutubeLogo = () => (
+    <Image source={require('../assets/youtube_logo.png')} style={[styles.image, { borderRadius: 10 }]} />
+);
 
 const Details: React.FC<Props> = ({ route, navigation }: Props) => {
     const { itemName } = route.params;
@@ -31,54 +38,69 @@ const Details: React.FC<Props> = ({ route, navigation }: Props) => {
                 </Pressable>
             </View>
             <View style={styles.infosBox}>
-                <Text style={styles.textStat}>Statistics:</Text>
-                <Text>30 liked posts</Text>
-                <Text>12 account followed</Text>
-                <Text>21 hashtags liked</Text>
+                <View>
+                    <Text style={styles.textStat}>Statistics:</Text>
+                    <Text>30 liked posts</Text>
+                    <Text>12 account followed</Text>
+                    <Text>21 hashtags liked</Text>
+                </View>
+                <View style={[{ marginLeft: 160 }]}>
+                    <InstaLogo />
+                    <TiktokLogo />
+                    <YoutubeLogo />
+                </View>
             </View>
             <View style={[styles.line, { marginTop: 350 }]} />
             {/* <ScrollView horizontal={true} style={[{ marginTop: 100}]}> */}
-            <ScrollView style={[{ marginTop: 70, alignSelf: 'center' }]}>
+            <View style={[{ marginTop: 70, alignSelf: 'center' }]}>
                 <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                    <View style={[styles.hashtagsButton, { width: 190 }]}>
+                    <View style={[styles.hashtagsButton, { width: '47%' }]}>
                         <Text style={styles.textStat}>#PECHE</Text>
                     </View>
-                    <View style={[styles.hashtagsButton, { width: 190 }]}>
+                    <View style={[styles.hashtagsButton, { width: '47%' }]}>
                         <Text style={styles.textStat}>#TENNIS</Text>
                     </View>
                 </View>
                 <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                    <View style={[styles.hashtagsButton, { width: 190 }]}>
+                    <View style={[styles.hashtagsButton, { width: '47%' }]}>
                         <Text style={styles.textStat}>#FOOTBALL</Text>
                     </View>
-                    <View style={[styles.hashtagsButton, { width: 190 }]}>
+                    <View style={[styles.hashtagsButton, { width: '47%' }]}>
                         <Text style={styles.textStat}>#GOLF</Text>
                     </View>
                 </View>
-            </ScrollView>
-            <View style={[styles.line, { marginTop: 600 }]} />
+            </View>
+            <View style={[styles.line, { marginTop: 570 }]} />
             <Text style={styles.actualityText}>CATEGORIES: </Text>
             <ScrollView style={[{ alignSelf: 'center' }]}>
                 <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
-                        <Text style={styles.textStat}>#PECHE</Text>
-                    </View>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/tennis.jpeg')} />
+
                         <Text style={styles.textStat}>#TENNIS</Text>
                     </View>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
-                        <Text style={styles.textStat}>#TENNIS</Text>
-                    </View>
-                </View>
-                <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
-                        <Text style={styles.textStat}>#FOOTBALL</Text>
-                    </View>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/golf.jpeg')} />
+
                         <Text style={styles.textStat}>#GOLF</Text>
                     </View>
-                    <View style={[styles.hashtagsButton, { width: 120 }]}>
-                        <Text style={styles.textStat}>#TENNIS</Text>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/fishing.jpeg')} />
+                        <Text style={styles.textStat}>#PECHE</Text>
+                    </View>
+                </View>
+                <View style={[{ flexDirection: 'row' }]}>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/foot.jpeg')} />
+                        <Text style={styles.textStat}>#FOOT</Text>
+                    </View>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/hockey.jpeg')} />
+                        <Text style={styles.textStat}>#HOCKEY</Text>
+                    </View>
+                    <View style={[styles.categorieButton, { width: '30%' }]}>
+                        <Image style={styles.tinyLogo} source={require('../assets/rugby.jpeg')} />
+                        <Text style={styles.textStat}>#RUGBY</Text>
                     </View>
                 </View>
             </ScrollView>
@@ -88,12 +110,29 @@ const Details: React.FC<Props> = ({ route, navigation }: Props) => {
 
 const styles = StyleSheet.create({
     textHashtags: {},
+    tinyLogo: {
+        // height: 300,
+        flex: 1,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        // borderBottomLeftRadius: 0,
+        width: '100%',
+    },
     hashtagsButton: {
         backgroundColor: 'white',
-        borderRadius: 40,
+        borderRadius: 20,
         height: 70,
-        margin: 10,
+        margin: 5,
         padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    categorieButton: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        height: 120,
+        margin: 5,
+        // padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -105,9 +144,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         alignSelf: 'center',
         padding: 10,
+        flexDirection: 'row',
     },
     textStat: {
-        fontSize: 20,
+        fontSize: 18,
         lineHeight: 30,
         fontWeight: '700',
         color: '#343DD0',
@@ -163,8 +203,6 @@ const styles = StyleSheet.create({
     image: {
         width: 38,
         height: 42,
-        marginBottom: 12,
-        marginLeft: 15,
     },
     headerButtonOne: {
         backgroundColor: 'white',
