@@ -109,10 +109,10 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                 <View style={styles.header}>
                     <LogoHeader />
                     <Text style={styles.stat}>Statistics</Text>
-                    <Pressable style={styles.headerButtonOne} onPress={() => navigation.navigate('Home')}>
+                    <Pressable style={styles.headerButtonOne} onPress={() => navigation.navigate('Home', {})}>
                         <Ionicons name={'ios-home-outline'} size={25} />
                     </Pressable>
-                    <Pressable style={styles.headerButtonTwo} onPress={() => navigation.navigate('Settings')}>
+                    <Pressable style={styles.headerButtonTwo} onPress={() => navigation.navigate('Settings', {})}>
                         {/* <Text>ok</Text> */}
                         <Ionicons name={'ios-settings-outline'} size={25} />
                     </Pressable>

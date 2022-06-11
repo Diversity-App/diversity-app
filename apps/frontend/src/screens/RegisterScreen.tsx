@@ -80,7 +80,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
             })
             .then((response) => {
                 console.log(response);
-                navigation.navigate('Home');
+                navigation.navigate('Home', {});
             })
             .catch((error) => {
                 console.log(error);
@@ -98,7 +98,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
     } else {
         return (
             <Background>
-                <BackButton goBack={() => navigation.navigate('LandingScreen')} />
+                <BackButton goBack={() => navigation.navigate('LandingScreen', {})} />
                 <Logo />
                 <Header>Create Account.</Header>
                 <Input
@@ -176,7 +176,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }: Props) => {
                 {password.error ? <Text style={{ color: 'red' }}>{password.error}</Text> : null}
                 <View style={styles.row}>
                     <Text style={styles.label}>Already have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('LoginScreen', {})}>
                         <Text style={styles.link}>Login</Text>
                     </TouchableOpacity>
                 </View>

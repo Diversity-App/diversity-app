@@ -24,7 +24,7 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
                     backgroundColor: 'white',
                     justifyContent: 'center',
                 }}
-                onPress={() => navigation.navigate('Dashboard')}>
+                onPress={() => navigation.navigate('Dashboard', {})}>
                 DashBoard
             </Button>
         </Background>
