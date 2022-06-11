@@ -15,7 +15,13 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
     let [fontsLoaded] = useFonts({
         SourceCodePro_400Regular,
     });
-    const dataArray = [
+
+    const dataArray: {
+        id: number;
+        title: string;
+        icon: string;
+        percentage: string;
+    }[] = [
         {
             id: 1,
             title: 'Sport',
@@ -138,7 +144,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                             itemName: item.title,
                                         });
                                     }}>
-                                    <Ionicons name={item.icon} size={30} />
+                                    <Ionicons name={item.icon as any} size={30} />
                                 </Pressable>
                             </View>
                         ))}
@@ -170,7 +176,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                     }}>
                                     {item.title}
                                 </Text>
-                                <Ionicons name={item.icon} size={60} />
+                                <Ionicons name={item.icon as any} size={60} />
                                 <Text
                                     style={{
                                         fontSize: 35,
