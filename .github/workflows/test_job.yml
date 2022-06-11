@@ -24,8 +24,12 @@ jobs:
       - uses: actions/setup-node@v2.4.1
         with:
           node-version: '16'
+      - run: echo 'DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres' > .env
+        working-directory: ${{ matrix.directories }}
       - run: npm run test
         working-directory: ${{ matrix.directories }}
+        env: 
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
       - uses: ArtiomTr/jest-coverage-report-action@v2
         name: Generate coverage report
         with:
