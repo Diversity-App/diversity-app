@@ -1,19 +1,20 @@
 import React, { memo } from 'react';
-// import Button from '../components/Button';
 import { Navigation } from '../types';
-// import { Button } from 'react-native-paper';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Text, StyleSheet, View, Image, Pressable, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, Image, Pressable, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../core/theme';
-
+import Background from '../components/Background';
+import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
 type Props = {
     navigation: Navigation;
 };
-
 const LogoHeader = () => <Image source={require('../assets/logo_blanc.png')} style={styles.image} />;
 
 const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
+    let [fontsLoaded] = useFonts({
+        SourceCodePro_400Regular,
+    });
     const dataArray = [
         {
             id: 1,
@@ -89,95 +90,103 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
         },
     ];
 
-    return (
-        // <Background>
-        <ScrollView style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
-            <View style={styles.header}>
-                <LogoHeader />
-                <Text style={styles.stat}>Statistics</Text>
-                <Pressable style={styles.headerButtonOne} onPress={() => navigation.navigate('Home')}>
-                    <Ionicons name={'ios-home-outline'} size={25} />
-                </Pressable>
-                <Pressable style={styles.headerButtonTwo} onPress={() => navigation.navigate('Settings')}>
-                    {/* <Text>ok</Text> */}
-                    <Ionicons name={'ios-settings-outline'} size={25} />
-                </Pressable>
-            </View>
-            <View>
-                <AnimatedCircularProgress
-                    size={250}
-                    width={20}
-                    fill={75}
-                    tintColor="#00e0ff"
-                    onAnimationComplete={() => console.log('onAnimationComplete')}
-                    backgroundColor="#3d5875"
-                    rotation={0}
-                    lineCap="round"
-                    style={styles.progress}
-                />
-                <Text style={styles.scoreValue}>75%</Text>
-                <View style={styles.line} />
-                <Text style={styles.actualityTexte}>Actuality :</Text>
-                <ScrollView horizontal={true} style={styles.actuality}>
-                    {dataArray.map((item) => (
-                        <View key={item.id}>
+    if (!fontsLoaded) {
+        return (
+            <Background>
+                <ActivityIndicator size="large" />
+            </Background>
+        );
+    } else {
+        return (
+            // <Background>
+            <ScrollView style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
+                <View style={styles.header}>
+                    <LogoHeader />
+                    <Text style={styles.stat}>Statistics</Text>
+                    <Pressable style={styles.headerButtonOne} onPress={() => navigation.navigate('Home')}>
+                        <Ionicons name={'ios-home-outline'} size={25} />
+                    </Pressable>
+                    <Pressable style={styles.headerButtonTwo} onPress={() => navigation.navigate('Settings')}>
+                        {/* <Text>ok</Text> */}
+                        <Ionicons name={'ios-settings-outline'} size={25} />
+                    </Pressable>
+                </View>
+                <View>
+                    <AnimatedCircularProgress
+                        size={250}
+                        width={20}
+                        fill={75}
+                        tintColor="#00e0ff"
+                        onAnimationComplete={() => console.log('onAnimationComplete')}
+                        backgroundColor="#3d5875"
+                        rotation={0}
+                        lineCap="round"
+                        style={styles.progress}
+                    />
+                    <Text style={styles.scoreValue}>75%</Text>
+                    <View style={styles.line} />
+                    <Text style={styles.actualityTexte}>Actuality :</Text>
+                    <ScrollView horizontal={true} style={styles.actuality}>
+                        {dataArray.map((item) => (
+                            <View key={item.id}>
+                                <Pressable
+                                    style={styles.actualityButton}
+                                    onPress={() => {
+                                        /* 1. Navigate to the Details route with params */
+                                        navigation.navigate('DetailsScreen', {
+                                            itemId: item.id,
+                                            itemName: item.title,
+                                        });
+                                    }}>
+                                    <Ionicons name={item.icon} size={30} />
+                                </Pressable>
+                            </View>
+                        ))}
+                    </ScrollView>
+                    <ScrollView horizontal={true} style={{ alignSelf: 'center', marginTop: 30 }}>
+                        {dataArray.map((item) => (
                             <Pressable
-                                style={styles.actualityButton}
                                 onPress={() => {
-                                    /* 1. Navigate to the Details route with params */
                                     navigation.navigate('DetailsScreen', {
                                         itemId: item.id,
                                         itemName: item.title,
                                     });
+                                }}
+                                key={item.id}
+                                style={{
+                                    marginLeft: 25,
+                                    borderRadius: 7,
+                                    backgroundColor: '#fff',
+                                    width: 240,
+                                    height: 240,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}>
-                                <Ionicons name={item.icon} size={30} />
+                                <Text
+                                    style={{
+                                        fontSize: 35,
+                                        fontWeight: '700',
+                                        fontFamily: 'SourceCodePro_400Regular',
+                                    }}>
+                                    {item.title}
+                                </Text>
+                                <Ionicons name={item.icon} size={60} />
+                                <Text
+                                    style={{
+                                        fontSize: 35,
+                                        fontWeight: '700',
+                                        fontFamily: 'SourceCodePro_400Regular',
+                                    }}>
+                                    {item.percentage}
+                                </Text>
                             </Pressable>
-                        </View>
-                    ))}
-                </ScrollView>
-                <ScrollView horizontal={true} style={{ alignSelf: 'center', marginTop: 30 }}>
-                    {dataArray.map((item) => (
-                        <Pressable
-                            onPress={() => {
-                                /* 1. Navigate to the Details route with params */
-                                navigation.navigate('DetailsScreen', {
-                                    itemId: item.id,
-                                    itemName: item.title,
-                                });
-                            }}
-                            key={item.id}
-                            style={{
-                                marginLeft: 25,
-                                borderRadius: 7,
-                                backgroundColor: '#fff',
-                                width: 240,
-                                height: 240,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}>
-                            <Text
-                                style={{
-                                    fontSize: 35,
-                                    fontWeight: '700',
-                                }}>
-                                {item.title}
-                            </Text>
-                            <Ionicons name={item.icon} size={60} />
-                            <Text
-                                style={{
-                                    fontSize: 35,
-                                    fontWeight: '700',
-                                }}>
-                                {item.percentage}
-                            </Text>
-                        </Pressable>
-                    ))}
-                </ScrollView>
-            </View>
-        </ScrollView>
-        // </Background>
-    );
-    // }
+                        ))}
+                    </ScrollView>
+                </View>
+            </ScrollView>
+            // </Background>
+        );
+    }
 };
 
 const styles = StyleSheet.create({
@@ -189,7 +198,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 15,
-        // marginLeft: 15,
     },
     actualityTexte: {
         fontSize: 30,
@@ -198,9 +206,9 @@ const styles = StyleSheet.create({
         marginTop: 130,
         marginLeft: 10,
         lineHeight: 45,
+        fontFamily: 'SourceCodePro_400Regular',
     },
     actuality: {
-        // position: 'absolute',
         marginTop: 10,
         alignSelf: 'center',
     },
@@ -214,6 +222,7 @@ const styles = StyleSheet.create({
         lineHeight: 45,
         marginTop: -150,
         alignSelf: 'center',
+        fontFamily: 'SourceCodePro_400Regular',
     },
     header: {
         position: 'absolute',
@@ -222,7 +231,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     stat: {
-        // fontFamily: 'Source Code Pro',
+        fontFamily: 'SourceCodePro_400Regular',
         fontWeight: '700',
         fontSize: 30,
         color: 'white',
@@ -242,7 +251,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 70,
+        marginLeft: 25,
     },
     headerButtonTwo: {
         backgroundColor: 'white',
@@ -254,7 +263,6 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     progress: {
-        // marginBottom: 300,
         marginTop: 130,
         alignItems: 'center',
         justifyContent: 'center',
@@ -268,7 +276,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        // marginTop: 20,
     },
 });
 
