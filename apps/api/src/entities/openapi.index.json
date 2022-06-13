@@ -34,6 +34,9 @@
     },
     "/data/homePage": {
       "$ref": "./data/data.path.json#/homePage"
+    },
+    "/data/twitter/liked": {
+      "$ref": "./data/data.path.json#/twitter-liked"
     }
   },
   "components": {
@@ -70,6 +73,9 @@
       },
       "TwitterCallbackResponse": {
         "$ref": "./auth/sso/twitter/twitter.components.json#/schemas/TwitterCallbackResponse"
+      },
+      "LikedTweets": {
+        "$ref": "./data/data.components.json#/schemas/LikedTweets"
       }
     }
   }

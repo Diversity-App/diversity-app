@@ -38,5 +38,25 @@
         }
       }
     }
+  },
+  "twitter-liked": {
+    "get": {
+      "description": "Get liked tweeets",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/LikedTweets"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

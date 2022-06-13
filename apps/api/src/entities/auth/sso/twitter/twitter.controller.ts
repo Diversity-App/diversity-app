@@ -32,22 +32,9 @@ export default class TwitterController implements SSOController, SSOTools {
     ): Promise<void> {
         try {
             const { code } = req.query;
-            if (!code || typeof code !== 'string') {
-                // res.status(400).send({
-                //     status: 'error',
-                //     error: 'Bad request',
-                // });
-                throw new ApiError(400, 'Bad request');
-            }
+            if (!code || typeof code !== 'string') throw new ApiError(400, 'Bad request');
             const { user } = req;
-            if (!user) {
-                // res.status(401).send({
-                //     status: 'error',
-                //     error: 'Unauthorized',
-                // });
-                // return;
-                throw new ApiError(401, 'Unauthorized');
-            }
+            if (!user) throw new ApiError(401, 'Unauthorized');
             console.log(user);
             const token = await TwitterService.fetchToken(code);
             console.log(token);

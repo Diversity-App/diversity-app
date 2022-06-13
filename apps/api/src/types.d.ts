@@ -4,6 +4,7 @@ export interface Token {
     access_token: string;
     refresh_token: string;
     expires_in: number;
+    client_id: string;
 }
 
 export interface youtubeVideo {

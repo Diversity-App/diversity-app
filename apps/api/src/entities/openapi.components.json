@@ -38,6 +38,9 @@
     },
     "StatsResponse": {
       "$ref": "./data/data.components.json#/schemas/StatsResponse"
+    },
+    "LikedTweets": {
+      "$ref": "./data/data.components.json#/schemas/LikedTweets"
     }
   }
 }
