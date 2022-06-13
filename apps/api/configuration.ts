@@ -4,7 +4,7 @@ if (dotenv) dotenv.config();
 else console.log('Dotenv 🅱️roke ?');
 
 export default {
-    OPENAPI_SPEC_DEFINITION: process.env.OPENAPI_SPEC_DEFINITION ?? '../../shared/generated/openapi-v1.json',
+    OPENAPI_SPEC_DEFINITION: process.env.OPENAPI_SPEC_DEFINITION ?? '../../../shared/generated/openapi-v1.json',
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? '',
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ?? '',
     GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL ?? '',

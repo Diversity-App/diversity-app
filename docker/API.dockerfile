@@ -16,8 +16,6 @@ WORKDIR /app
 COPY apps/api ./apps/api/
 COPY shared shared
 
-RUN #ls shared && exit 1
-
 RUN npm run build --workspace apps/api
 
 
@@ -32,6 +30,7 @@ COPY --from=build /app/dist .
 COPY ./apps/api/prisma ./apps/api/prisma
 
 COPY apps/api/package*.json apps/api/
+COPY shared shared
 
 RUN npm install --workspace apps/api
 
