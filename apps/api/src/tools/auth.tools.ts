@@ -1,22 +1,22 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { compareSync, genSaltSync, hashSync } from 'bcrypt';
+import { sign, verify } from 'jsonwebtoken';
 import { User } from '../types.d';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 export const generateToken = (user: User): string => {
-    return jwt.sign(user, JWT_SECRET, {
+    return sign(user, JWT_SECRET, {
         expiresIn: '12h',
     });
 };
 
 export function hashPassword(password: string) {
-    const salt = bcrypt.genSaltSync(10);
-    return bcrypt.hashSync(password, salt);
+    const salt = genSaltSync(10);
+    return hashSync(password, salt);
 }
 
 export function checkPassword(password: string, hash: string) {
-    return bcrypt.compareSync(password, hash);
+    return compareSync(password, hash);
 }
 
 export const verifyToken = (req: any, res: any, next: any) => {
@@ -38,9 +38,9 @@ export const verifyToken = (req: any, res: any, next: any) => {
     }
 
     try {
-        const decoded = jwt.verify(access_token, JWT_SECRET);
+        const decoded = verify(access_token, JWT_SECRET);
         if (typeof decoded != 'string' && decoded.id) {
-            req.session.user = decoded;
+            req.user = decoded;
             next();
         } else {
             return res.status(401).send({

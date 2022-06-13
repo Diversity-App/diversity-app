@@ -1,11 +1,7 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
-  },
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:jest/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,9 +13,14 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "jest"
   ],
-
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
   "rules": {
     "prettier/prettier": "error",
     "prefer-destructuring": [
@@ -31,9 +32,17 @@
     ],
     "no-unused-vars": [
       "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true, "varsIgnorePattern": "^\\$", "argsIgnorePattern": "^\\$" }
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "^\\$",
+        "argsIgnorePattern": "^\\$"
+      }
     ],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ]
   }
 }

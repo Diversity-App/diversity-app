@@ -1,0 +1,42 @@
+{
+  "homePage": {
+    "get": {
+      "description": "Get the home page",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/HomepageResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "stats": {
+    "get": {
+      "description": "Get the stats",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/StatsResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
