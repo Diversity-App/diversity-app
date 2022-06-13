@@ -11,6 +11,12 @@ export default {
     GOOGLE_REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL ?? '',
     GOOGLE_SCOPE: process.env.GOOGLE_SCOPE ?? '',
     GOOGLE_STATE: process.env.GOOGLE_STATE ?? '',
+    TWITTER_CLIENT_ID: process.env.TWITTER_CLIENT_ID ?? '',
+    TWITTER_CLIENT_SECRET: process.env.TWITTER_CLIENT_SECRET ?? '',
+    TWITTER_CALLBACK_URL: process.env.TWITTER_CALLBACK_URL ?? '',
+    TWITTER_REDIRECT_URL: process.env.TWITTER_REDIRECT_URL ?? '',
+    TWITTER_SCOPE: process.env.TWITTER_SCOPE ?? '',
+    TWITTER_STATE: process.env.TWITTER_STATE ?? '',
     JWT_SECRET: process.env.JWT_SECRET ?? '',
     NODE_ENV: process.env.NODE_ENV ?? 'development',
 };

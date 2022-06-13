@@ -20,7 +20,7 @@ export function checkPassword(password: string, hash: string) {
 }
 
 export const verifyToken = (req: any, res: any, next: any) => {
-    const bearerHeader = req.headers['Authorization'] || req.cookies['API_TOKEN'];
+    const bearerHeader = req.headers['authorization'] || req.cookies['API_TOKEN'];
     if (!bearerHeader) {
         return res.status(401).send({
             status: 'error',

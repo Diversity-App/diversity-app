@@ -33,6 +33,8 @@ declare module 'express' {
 const app = express();
 app.use(session(sessionConfig));
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -46,7 +48,7 @@ app.use(
         apiSpec: openApiDocument,
         validateRequests: {
             removeAdditional: 'all',
-            allowUnknownQueryParameters: false,
+            allowUnknownQueryParameters: true,
             coerceTypes: false,
         },
         ignoreUndocumented: true,
