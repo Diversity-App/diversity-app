@@ -3,7 +3,6 @@ name: Docker API
 
 on:
   push:
-    branches: [main, dev]
     paths:
       - 'apps/api/**'
   workflow_dispatch:
@@ -12,7 +11,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}-api
+  IMAGE_NAME: api
 
 jobs:
   docker_image_build_and_push:
