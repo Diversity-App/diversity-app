@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "This is the API for the application",
+  "description": "This is the API for the application.",
   "main": "index.js",
   "keywords": [
     "mongodb",
