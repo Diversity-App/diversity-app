@@ -1,5 +1,6 @@
 import app from './src/app';
+import configuration from './configuration';
 
-app.listen(8080, () => {
+app.listen(configuration.PORT, () => {
     console.log('Listening on port 8080');
 });
