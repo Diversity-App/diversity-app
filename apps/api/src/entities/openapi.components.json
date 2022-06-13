@@ -38,6 +38,18 @@
     },
     "StatsResponse": {
       "$ref": "./data/data.components.json#/schemas/StatsResponse"
+    },
+    "UserInfosResponse": {
+      "$ref": "./data/data.components.json#/schemas/UserInfosResponse"
+    },
+    "UserPostsResponse": {
+      "$ref": "./data/data.components.json#/schemas/UserPostsResponse"
+    },
+    "UserInfosSummary": {
+      "$ref": "./data/data.components.json#/schemas/UserInfosSummary"
+    },
+    "UserPostsSummary": {
+      "$ref": "./data/data.components.json#/schemas/UserPostsSummary"
     }
   }
 }

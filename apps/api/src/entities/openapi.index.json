@@ -23,11 +23,23 @@
     "/auth/sso/google/callback": {
       "$ref": "./auth/sso/google/google.path.json#/callback"
     },
+    "/auth/sso/instagram/login": {
+      "$ref": "./auth/sso/instagram/instagram.path.json#/login"
+    },
+    "/auth/sso/instagram/callback": {
+      "$ref": "./auth/sso/instagram/instagram.path.json#/callback"
+    },
     "/data/stats": {
       "$ref": "./data/data.path.json#/stats"
     },
     "/data/homePage": {
       "$ref": "./data/data.path.json#/homePage"
+    },
+    "/data/posts": {
+      "$ref": "./data/data.path.json#/posts"
+    },
+    "/data/user": {
+      "$ref": "./data/data.path.json#/infos"
     }
   },
   "components": {
@@ -61,6 +73,15 @@
       },
       "GoogleCallbackResponse": {
         "$ref": "./auth/sso/google/google.components.json#/schemas/GoogleCallbackResponse"
+      },
+      "InstagramCallbackResponse": {
+        "$ref": "./auth/sso/instagram/instagram.components.json#/schemas/InstagramCallbackResponse"
+      },
+      "UserInfosSummary": {
+        "$ref": "./data/data.components.json#/schemas/UserInfosSummary"
+      },
+      "UserPostsSummary": {
+        "$ref": "./data/data.components.json#/schemas/UserPostsSummary"
       }
     }
   }

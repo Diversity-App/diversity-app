@@ -38,5 +38,69 @@
         }
       }
     }
+  },
+  "posts": {
+    "get": {
+      "description": "Get the user instagram posts",
+      "tags": [
+        "data"
+      ],
+      "parameters": [
+        {
+          "name": "token",
+          "in": "query",
+          "description": "Instagram access token",
+          "required": true,
+          "allowReserved": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/UserPostsResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "infos": {
+    "get": {
+      "description": "Get the user instagram infos",
+      "tags": [
+        "data"
+      ],
+      "parameters": [
+        {
+          "name": "token",
+          "in": "query",
+          "description": "Instagram access token",
+          "required": true,
+          "allowReserved": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/UserInfosResponse"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
