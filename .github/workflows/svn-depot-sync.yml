@@ -19,7 +19,7 @@ jobs:
       - name: Cloning Reposity
         run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
       - name: Sync with SVN Repository
-        run: rsync -av --progress . /sync/snv/trunk --exclude sync
+        run: rsync -av --ignore-existing --progress . /sync/snv/trunk --exclude sync
       - name: Added to SVN
         run: svn add sync/snv/trunk
       - name: Commit
