@@ -17,9 +17,9 @@ jobs:
       - name: Install SVN
         run: sudo apt-get install subversion rsync
       - name: Cloning Reposity & Sync
-        run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}; \
-          rsync -av --ignore-existing --progress . /sync/snv/trunk
-      - run: ls -alR sync
+        run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}};
+      - name: Copy files
+        run: chmod +x svn-sync-shell.sh; ./svn-sync-shell.sh sync/snv/trunk;
       - name: Added to SVN
         run: svn add sync/snv/trunk
       - name: Commit
