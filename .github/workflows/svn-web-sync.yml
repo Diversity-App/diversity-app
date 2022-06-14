@@ -18,7 +18,7 @@ jobs:
       - name: Install git-svn
         run: sudo apt-get install subversion
       - name: Sync with SVN Repository
-        run: svn clone -s ${{SVN_REPO_ROOT_URL}} sync/website # Is this ok ?
+        run: svn clone -s ${{secrets.SVN_REPO_ROOT_URL}} sync/website # Is this ok ?
       - name: Sync with SVN Repository
         run: cp -r apps/website/* sync/website/www
       - name: Sync with SVN Repository
