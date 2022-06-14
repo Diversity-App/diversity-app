@@ -82,6 +82,23 @@ export default class DataController {
         }
     }
 
+    static async getTwitterProfile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+            const twitterToken: Token = await SsoTool.getProviderToken(user.id, 'Twitter');
+
+            if (!twitterToken) throw new ApiError(401, 'You must be logged in to access this page');
+            const data = await TwitterApiWrapper.getUserProfile(twitterToken.access_token);
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully retrieved data',
+                data: { id: data.id, name: data.name, username: data.username },
+            });
+        } catch (e) {
+            next(e);
+        }
+    }
+
     // static async getLikedPlaylists(req: Request, res: Response) {
     //     try {
     //         const { user } = req.session;

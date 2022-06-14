@@ -9,4 +9,6 @@ router.get('/homePage', verifyToken, DataController.getHomePage);
 router.get('/stats', DataController.getStats);
 
 router.get('/twitter/liked', verifyToken, DataController.getLikedTweets);
+router.get('/twitter/profile', verifyToken, DataController.getTwitterProfile);
+
 export default router;

@@ -37,6 +37,9 @@
     },
     "/data/twitter/liked": {
       "$ref": "./data/data.path.json#/twitter-liked"
+    },
+    "/data/twitter/profile": {
+      "$ref": "./data/data.path.json#/twitter-profile"
     }
   },
   "components": {
@@ -76,6 +79,9 @@
       },
       "LikedTweets": {
         "$ref": "./data/data.components.json#/schemas/LikedTweets"
+      },
+      "TwitterProfile": {
+        "$ref": "./data/data.components.json#/schemas/TwitterProfile"
       }
     }
   }

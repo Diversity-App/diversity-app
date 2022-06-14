@@ -41,6 +41,9 @@
     },
     "LikedTweets": {
       "$ref": "./data/data.components.json#/schemas/LikedTweets"
+    },
+    "TwitterProfile": {
+      "$ref": "./data/data.components.json#/schemas/TwitterProfile"
     }
   }
 }

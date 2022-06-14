@@ -35,4 +35,14 @@ describe('Data', () => {
             expect(response.status).toBe(200);
         });
     });
+
+    describe('get twitter profile', () => {
+        it('should successfully return data', async () => {
+            (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
+            const agent = supertest.agent(app);
+            agent.auth('123', { type: 'bearer' });
+            const response = await agent.get('/v1/data/twitter/profile').set('Authorization', `Bearer 123`);
+            expect(response.status).toBe(200);
+        });
+    });
 });

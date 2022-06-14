@@ -58,5 +58,25 @@
         }
       }
     }
+  },
+  "twitter-profile": {
+    "get": {
+      "description": "Get my user profile twitter",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/TwitterProfile"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
