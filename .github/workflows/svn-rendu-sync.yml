@@ -19,7 +19,7 @@ jobs:
       - name: Install git-svn
         run: sudo apt-get install subversion
       - name: Sync with SVN Repository
-        run: svn clone -s ${{secrets.SVN_REPO_ROOT_URL}} sync/rendu # Is this ok ?
+        run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/rendu --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
       - name: Sync with SVN Repository
         run: cp -r apps/rendu/* sync/rendu/rendu
       - name: Sync with SVN Repository
