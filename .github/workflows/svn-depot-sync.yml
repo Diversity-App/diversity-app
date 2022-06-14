@@ -16,11 +16,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install SVN
         run: sudo apt-get install subversion
-      - name: Cloning Reposity
-        run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
+      - name: Cloning Reposity & Sync
+        run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}; \
+          rsync -av --ignore-existing --progress . /sync/snv/trunk
       - run: ls -alR sync
-      - name: Sync with SVN Repository
-        run: rsync -av --ignore-existing --progress . /sync/snv/trunk
       - name: Added to SVN
         run: svn add sync/snv/trunk
       - name: Commit
