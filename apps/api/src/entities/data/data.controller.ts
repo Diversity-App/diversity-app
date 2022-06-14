@@ -122,6 +122,27 @@ export default class DataController {
         }
     }
 
+    static async myBookMarks(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+            const twitterToken: Token = await SsoTool.getProviderToken(user.id, 'Twitter');
+            if (!twitterToken) throw new ApiError(401, 'You must be logged in to access this page');
+            const data = await TwitterApiWrapper.getUserBookmarks(twitterToken.client_id, twitterToken.access_token);
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully retrieved data',
+                data: {
+                    data: data.data ? data.data : [],
+                    total: data.meta.result_count,
+                    next: data.meta.next_token ? data.meta.next_token : '',
+                    prev: data.meta.next_token ? data.meta.previous_token : '',
+                },
+            });
+        } catch (e) {
+            next(e);
+        }
+    }
+
     // static async getLikedPlaylists(req: Request, res: Response) {
     //     try {
     //         const { user } = req.session;

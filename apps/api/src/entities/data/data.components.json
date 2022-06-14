@@ -216,6 +216,34 @@
           "type": "string"
         }
       }
+    },
+    "Bookmarks": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "total": {
+          "type": "number"
+        },
+        "next": {
+          "type": "string"
+        },
+        "prev": {
+          "type": "string"
+        }
+      }
     }
   }
 }

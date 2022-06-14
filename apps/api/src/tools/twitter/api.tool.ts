@@ -29,4 +29,12 @@ export default class TwitterApiWrapper {
         const data = response.data;
         return data;
     }
+    static async getUserBookmarks(userID: string, token: string): Promise<ILiked> {
+        const url = `https://api.twitter.com/2/users/${userID}/bookmarks`;
+        const response = await axios(url, {
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        });
+        const data = response.data;
+        return data;
+    }
 }

@@ -47,6 +47,9 @@
     },
     "SearchTweets": {
       "$ref": "./data/data.components.json#/schemas/SearchTweets"
+    },
+    "Bookmarks": {
+      "$ref": "./data/data.components.json#/schemas/Bookmarks"
     }
   }
 }

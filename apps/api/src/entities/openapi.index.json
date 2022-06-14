@@ -43,6 +43,9 @@
     },
     "/data/twitter/search": {
       "$ref": "./data/data.path.json#/twitter-search"
+    },
+    "/data/twitter/bookmarks": {
+      "$ref": "./data/data.path.json#/twitter-bookmarks"
     }
   },
   "components": {
@@ -88,6 +91,9 @@
       },
       "SearchTweets": {
         "$ref": "./data/data.components.json#/schemas/SearchTweets"
+      },
+      "Bookmarks": {
+        "$ref": "./data/data.components.json#/schemas/Bookmarks"
       }
     }
   }
