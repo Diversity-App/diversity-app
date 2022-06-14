@@ -44,6 +44,9 @@
     },
     "TwitterProfile": {
       "$ref": "./data/data.components.json#/schemas/TwitterProfile"
+    },
+    "SearchTweets": {
+      "$ref": "./data/data.components.json#/schemas/SearchTweets"
     }
   }
 }

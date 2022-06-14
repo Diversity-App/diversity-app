@@ -40,6 +40,9 @@
     },
     "/data/twitter/profile": {
       "$ref": "./data/data.path.json#/twitter-profile"
+    },
+    "/data/twitter/search": {
+      "$ref": "./data/data.path.json#/twitter-search"
     }
   },
   "components": {
@@ -82,6 +85,9 @@
       },
       "TwitterProfile": {
         "$ref": "./data/data.components.json#/schemas/TwitterProfile"
+      },
+      "SearchTweets": {
+        "$ref": "./data/data.components.json#/schemas/SearchTweets"
       }
     }
   }

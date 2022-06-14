@@ -1,4 +1,5 @@
 import axios from 'axios';
+import QueryString from 'qs';
 import { ILiked, IProfile } from './types';
 
 export default class TwitterApiWrapper {
@@ -17,7 +18,15 @@ export default class TwitterApiWrapper {
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         });
         const data = response.data;
-        console.log(data);
+        return data;
+    }
+
+    static async searchTweets(token: string, query: QueryString.ParsedQs): Promise<ILiked> {
+        const url = `https://api.twitter.com/2/tweets/search/recent?${new URLSearchParams(query as any).toString()}`;
+        const response = await axios(url, {
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        });
+        const data = response.data;
         return data;
     }
 }
