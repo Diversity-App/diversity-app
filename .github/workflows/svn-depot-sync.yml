@@ -23,6 +23,6 @@ jobs:
       - name: Added to SVN
         run: svn add --force sync/snv/trunk/*
       - name: Commit
-        run: svn commit -m "Sync with SVN Repository" sync/snv/
+        run: svn commit -m "Sync with SVN Repository" sync/snv/ --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
       - name: Update
-        run: svn update sync/snv/
+        run: svn update sync/snv/ --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
