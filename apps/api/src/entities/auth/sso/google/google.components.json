@@ -1,0 +1,21 @@
+{
+  "schemas": {
+    "GoogleCallbackParams": {
+    },
+    "GoogleCallbackResponse": {
+      "allOf": [
+        {
+          "$ref": "../../../openapi.index.json#/components/schemas/ApiResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

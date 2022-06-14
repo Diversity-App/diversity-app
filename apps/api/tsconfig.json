@@ -5,16 +5,15 @@
     "target": "esnext",
     "noImplicitAny": true,
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist",
+    "sourceMap": false,
+    "outDir": "../../dist",
     "types": [
-      "node"
-    ]
+      "node",
+      "jest"
+    ],
+    "noEmit": true
   },
   "compileOnSave": false,
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
     "node_modules/**",
     "../../node_modules/**",

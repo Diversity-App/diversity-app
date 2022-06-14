@@ -1,0 +1,24 @@
+# push on apps/snv
+on:
+  push:
+    branches:
+      - master
+name: Sync snv Epitech SVn
+jobs:
+  sync:
+    name: Sync with SVN Repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SVN
+        run: sudo apt-get install subversion
+      - name: Cloning Reposity
+        run: svn clone -s ${{SVN_REPO_ROOT_URL}} sync/snv
+      - name: Sync with SVN Repository
+        run: rsync -av --progress . /sync/snv/trunk --exclude sync
+      - name: Added to SVN
+        run: svn add sync/snv/trunk
+      - name: Commit
+        run: svn commit -m "Sync with SVN Repository" sync/snv/
+      - name: Update
+        run: svn update sync/snv/

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Title",
-    "description": "Title",
+    "title": "Diversity Application API",
+    "description": "Diversity Application API",
     "version": "3.0.0"
   },
   "servers": [
@@ -82,6 +82,91 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/sso/google/login": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Get the login page",
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect to login page"
+          }
+        }
+      }
+    },
+    "/auth/sso/google/callback": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Consent screen callback, returns token",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Authorization code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Redirect to login page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoogleCallbackResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/stats": {
+      "get": {
+        "description": "Get the stats",
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/homePage": {
+      "get": {
+        "description": "Get the home page",
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomepageResponse"
                 }
               }
             }
@@ -183,6 +268,168 @@
             "required": [
               "data"
             ]
+          }
+        ]
+      },
+      "StatItem": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created_at": {
+            "type": "number"
+          },
+          "updated_at": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "source",
+          "title",
+          "description",
+          "tags",
+          "categories",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "StatSummary": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatItem"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tagsRatio": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "name",
+                "count"
+              ]
+            }
+          },
+          "categoriesRatio": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "name",
+                "count"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "categories",
+          "tags",
+          "tagsRatio",
+          "categoriesRatio"
+        ]
+      },
+      "HomepageResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ApiResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/StatSummary"
+              }
+            },
+            "required": [
+              "data"
+            ]
+          }
+        ]
+      },
+      "StatsResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ApiResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "#/components/schemas/StatSummary"
+              }
+            },
+            "required": [
+              "data"
+            ]
+          }
+        ]
+      },
+      "GoogleCallbackResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ApiResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string"
+              }
+            }
           }
         ]
       }
