@@ -1,9 +1,13 @@
 on:
+  workflow_dispatch:
+    branches:
+      - main
+      - dev
   push:
     paths:
       - apps/website
     branches:
-      - master
+      - main
 name: Sync website Epitech SVn
 jobs:
   sync:

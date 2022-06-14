@@ -1,8 +1,12 @@
 # push on apps/snv
 on:
+  workflow_dispatch:
+    branches:
+      - main
+      - dev
   push:
     branches:
-      - master
+      - main
 name: Sync snv Epitech SVn
 jobs:
   sync:

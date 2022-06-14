@@ -1,10 +1,14 @@
 # push on apps/rendu
 on:
+  workflow_dispatch:
+    branches:
+      - main
+      - dev
   push:
     paths:
       - apps/rendu
     branches:
-      - master
+      - main
 name: Sync Rendu Epitech SVn
 jobs:
   sync:
