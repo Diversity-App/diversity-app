@@ -21,7 +21,7 @@ jobs:
       - name: Copy files
         run: chmod +x svn-sync-shell.sh; ./svn-sync-shell.sh sync/snv/trunk;
       - name: Added to SVN
-        run: svn add sync/snv/trunk
+        run: svn add --force sync/snv/trunk/*
       - name: Commit
         run: svn commit -m "Sync with SVN Repository" sync/snv/
       - name: Update
