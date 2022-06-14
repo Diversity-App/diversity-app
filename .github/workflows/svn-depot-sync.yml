@@ -18,7 +18,7 @@ jobs:
         run: sudo apt-get install subversion
       - name: Cloning Reposity
         run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
-      - run: ls -al sync/svn
+      - run: ls -al
       - name: Sync with SVN Repository
         run: rsync -av --ignore-existing --progress . /sync/snv/trunk
       - name: Added to SVN
