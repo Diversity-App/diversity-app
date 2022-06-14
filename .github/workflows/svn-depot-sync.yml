@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install SVN
-        run: sudo apt-get install subversion rsync
+        run: sudo apt-get install subversion
       - name: Cloning Reposity & Sync
         run: svn checkout ${{secrets.SVN_REPO_ROOT_URL}} sync/snv --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}};
       - name: Copy files

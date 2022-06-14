@@ -23,8 +23,8 @@ jobs:
       - name: Sync with SVN Repository
         run: cp -r apps/rendu/* sync/rendu/rendu
       - name: Sync with SVN Repository
-        run: svn add sync/rendu/rendu
+        run: svn add --force sync/rendu/rendu/*
       - name: Sync with SVN Repository
-        run: svn commit -m "Sync with SVN Repository" sync/rendu/
+        run: svn commit -m "Sync with SVN Repository" sync/rendu/  --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
       - name: Sync with SVN Repository
-        run: svn update sync/rendu/
+        run: svn update sync/rendu/ --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}

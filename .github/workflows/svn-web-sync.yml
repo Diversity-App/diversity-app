@@ -22,8 +22,8 @@ jobs:
       - name: Sync with SVN Repository
         run: cp -r apps/website/* sync/website/www
       - name: Sync with SVN Repository
-        run: svn add sync/website/www
+        run: svn add --force sync/website/www/*
       - name: Sync with SVN Repository
-        run: svn commit -m "Sync with SVN Repository" sync/website/
+        run: svn commit -m "Sync with SVN Repository" sync/website/ --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
       - name: Sync with SVN Repository
-        run: svn update sync/website/
+        run: svn update sync/website/ --username ${{secrets.SVN_USERNAME}} --password ${{secrets.SVN_PASSWORD}}
