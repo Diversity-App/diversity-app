@@ -1,0 +1,25 @@
+on:
+  push:
+    paths:
+      - apps/website
+    branches:
+      - master
+name: Sync website Epitech SVn
+jobs:
+  sync:
+    name: Sync with SVN Repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install git-svn
+        run: sudo apt-get install subversion
+      - name: Sync with SVN Repository
+        run: svn clone -s ${{SVN_REPO_ROOT_URL}} sync/website # Is this ok ?
+      - name: Sync with SVN Repository
+        run: cp -r apps/website/* sync/website/www
+      - name: Sync with SVN Repository
+        run: svn add sync/website/www
+      - name: Sync with SVN Repository
+        run: svn commit -m "Sync with SVN Repository" sync/website/
+      - name: Sync with SVN Repository
+        run: svn update sync/website/
