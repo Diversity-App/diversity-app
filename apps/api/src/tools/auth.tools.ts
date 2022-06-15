@@ -38,7 +38,7 @@ export const verifyToken = (req: any, res: any, next: any) => {
     }
 
     try {
-        const decoded = verify(access_token, JWT_SECRET);
+        const decoded = verify(access_token, JWT_SECRET) as unknown as User;
         if (typeof decoded != 'string' && decoded.id) {
             req.user = decoded;
             next();
