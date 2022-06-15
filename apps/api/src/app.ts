@@ -46,7 +46,7 @@ app.use(
         apiSpec: openApiDocument,
         validateRequests: {
             removeAdditional: 'all',
-            allowUnknownQueryParameters: false,
+            allowUnknownQueryParameters: true,
             coerceTypes: false,
         },
         ignoreUndocumented: true,

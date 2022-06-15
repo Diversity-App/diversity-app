@@ -21,6 +21,7 @@ export function checkPassword(password: string, hash: string) {
 
 export const verifyToken = (req: any, res: any, next: any) => {
     const bearerHeader = req.headers['Authorization'] || req.cookies['API_TOKEN'];
+    throw new Error('Not implemented');
     if (!bearerHeader) {
         return res.status(401).send({
             status: 'error',
@@ -38,7 +39,7 @@ export const verifyToken = (req: any, res: any, next: any) => {
     }
 
     try {
-        const decoded = verify(access_token, JWT_SECRET);
+        const decoded = verify(access_token, JWT_SECRET) as unknown as User;
         if (typeof decoded != 'string' && decoded.id) {
             req.user = decoded;
             next();
