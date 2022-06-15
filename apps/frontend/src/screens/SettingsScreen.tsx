@@ -7,6 +7,7 @@ import { theme } from '../core/theme';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useTheme } from 'react-native-paper';
 import { Switch } from 'react-native-paper';
+import BackButton from '../components/BackButton';
 import RNPickerSelect from 'react-native-picker-select';
 
 import CountryPicker from '@volkenomakers/react-native-country-picker';
@@ -29,6 +30,8 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
     return (
         <ScrollView>
             <View style={styles.header}></View>
+            <BackButton goBack={() => navigation.navigate('Dashboard', {})} />
+
             <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
             <View style={styles.body}>
                 <View>
@@ -161,15 +164,21 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
                         <Image style={styles.delete} source={require('../assets/delete.png')} />
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={{alignSelf:'center', marginRight: 30}} onPress={() => navigation.navigate('Dashboard', {})}>
+                    <Image style={styles.save} source={require('../assets/Save.png')} />
+                </TouchableOpacity>
             </View>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    container_toggle:{
+    picker_text: {
+        marginTop: 100,
+    },
+    container_toggle: {
         borderBottomWidth: 1,
-        marginBottom: 10
+        marginBottom: 10,
     },
     logout_txt: {
         marginTop: 35,
@@ -179,24 +188,30 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         fontSize: 24,
     },
+    save: {
+        width: 160,
+        height: 60,
+        marginLeft: 36,
+        marginTop: 20,
+        marginBottom: 20
+    },
     delete: {
         width: 60,
         height: 70,
         marginLeft: 36,
-        marginTop: 15
-
+        marginTop: 15,
     },
     logout: {
         width: 70,
         height: 70,
         marginLeft: 130,
-        marginTop: 15
+        marginTop: 15,
     },
     container_logout: {
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 5,
         marginBottom: 15,
-        borderTopWidth: 1
+        borderTopWidth: 1,
     },
     container_date: {
         flexDirection: 'row',
@@ -243,13 +258,13 @@ const styles = StyleSheet.create({
     },
     container_logo: {
         flexDirection: 'row',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
     },
     logo: {
         width: 60,
         height: 60,
         marginLeft: 50,
-        marginBottom: 15
+        marginBottom: 15,
     },
     logo_ytb: {
         width: 70,
@@ -288,20 +303,20 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceCodePro_400Regular',
         fontWeight: '900',
         fontSize: 24,
-        marginBottom: 15
+        marginBottom: 15,
     },
     picker: {
         height: 30,
-        borderWidth: 1,
-        borderRadius: 0,
+        borderWidth: 0,
+        borderRadius: 20,
         marginStart: 15,
         marginEnd: 15,
         marginTop: 10,
-        marginBottom: 15,
+        marginBottom: 10,
     },
     container_info: {
         flexDirection: 'column',
-        marginTop: 20,
+        marginTop: 10,
         borderBottomWidth: 1,
     },
     first_text: {
@@ -316,6 +331,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 5,
         marginBottom: 0,
+        marginTop: 15,
         fontWeight: '900',
         fontFamily: 'SourceCodePro_400Regular',
         fontSize: 24,
@@ -325,7 +341,7 @@ const styles = StyleSheet.create({
     },
     switch_last: {
         alignSelf: 'flex-end',
-        marginBottom: 15
+        marginBottom: 15,
     },
     textInput: {},
     first_input: {
