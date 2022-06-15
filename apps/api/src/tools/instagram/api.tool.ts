@@ -11,7 +11,6 @@ export default class InstagramApiWrapper {
 
         const response = await axios(`https://graph.instagram.com/me?${new URLSearchParams(params).toString()}`, {});
         const data = response.data;
-        console.log(data);
         return data;
     }
 
@@ -26,8 +25,7 @@ export default class InstagramApiWrapper {
             method: 'get',
             url: url,
         });
-        const data = response.data;
-        console.log(data);
+        const data = response.data.data;
         return data;
     }
 }

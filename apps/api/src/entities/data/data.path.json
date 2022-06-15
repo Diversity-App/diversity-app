@@ -45,18 +45,6 @@
       "tags": [
         "data"
       ],
-      "parameters": [
-        {
-          "name": "token",
-          "in": "query",
-          "description": "Instagram access token",
-          "required": true,
-          "allowReserved": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
       "responses": {
         "200": {
           "description": "Successful response",
@@ -71,23 +59,12 @@
       }
     }
   },
+
   "infos": {
     "get": {
       "description": "Get the user instagram infos",
       "tags": [
         "data"
-      ],
-      "parameters": [
-        {
-          "name": "token",
-          "in": "query",
-          "description": "Instagram access token",
-          "required": true,
-          "allowReserved": true,
-          "schema": {
-            "type": "string"
-          }
-        }
       ],
       "responses": {
         "200": {
