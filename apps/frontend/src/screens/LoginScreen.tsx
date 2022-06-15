@@ -150,6 +150,12 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
                 {password.error ? <Text style={{ color: 'red' }}>{password.error}</Text> : null}
                 {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
                 <View style={styles.row}>
+                    <Text style={styles.label}>Forgot your password ? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('ForgotPasswordScreen', {})}>
+                        <Text style={styles.link}>Click Here</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.row}>
                     <Text style={styles.label}>Don’t have an account? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen', {})}>
                         <Text style={styles.link}>Sign up</Text>

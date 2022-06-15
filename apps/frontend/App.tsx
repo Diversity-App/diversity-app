@@ -10,6 +10,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import Dashboard from './src/screens/Dashboard';
 import Settings from './src/screens/SettingsScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -43,6 +44,11 @@ export default function App() {
                     <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeTabs} />
                     <Stack.Screen name="RegisterScreen" options={{ headerShown: false }} component={RegisterScreen} />
                     <Stack.Screen name="DetailsScreen" options={{ headerShown: false }} component={DetailsScreen} />
+                    <Stack.Screen
+                        name="ForgotPasswordScreen"
+                        options={{ headerShown: false }}
+                        component={ForgotPasswordScreen}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
         </>
