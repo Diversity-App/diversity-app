@@ -2,11 +2,8 @@ import React, { memo, useState } from 'react';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
-import { Button } from 'react-native-paper';
-import Paragraph from '../components/Paragraph';
 import { Navigation } from '../types';
-import { TextInput, View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
+import { TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from '../components/BackButton';
 
 type Props = {
@@ -15,12 +12,9 @@ type Props = {
 
 const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
     const [Email, setEmail] = useState('');
-    let [fontsLoaded] = useFonts({
-        SourceCodePro_400Regular,
-    });
     return (
         <Background>
-        <BackButton goBack={() => navigation.navigate('LoginScreen', {})} />
+            <BackButton goBack={() => navigation.navigate('LoginScreen', {})} />
 
             <Logo />
             <Header>Reset Your Password</Header>
@@ -31,7 +25,9 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                 placeholder={'Email'}
                 style={styles.input}
             />
-            <TouchableOpacity><Text style={styles.submit}>Submit</Text></TouchableOpacity>
+            <TouchableOpacity>
+                <Text style={styles.submit}>Submit</Text>
+            </TouchableOpacity>
         </Background>
     );
 };
@@ -74,8 +70,8 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '700',
         fontFamily: 'SourceCodePro_400Regular',
-        color: 'white'
-    }
+        color: 'white',
+    },
 });
 
 export default memo(LandingScreen);

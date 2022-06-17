@@ -6,7 +6,6 @@ import { theme } from '../core/theme';
 import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
 import Background from '../components/Background';
 
-
 type Props = {
     navigation: Navigation;
     route: any;

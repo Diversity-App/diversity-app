@@ -1,11 +1,7 @@
 import React, { memo, useState } from 'react';
-import Background from '../components/Background';
 import { Navigation } from '../types';
-import Paragraph from '../components/Paragraph';
-import { ActivityIndicator, Platform, TextInput, Button, ScrollView } from 'react-native';
+import { TextInput, ScrollView } from 'react-native';
 import { theme } from '../core/theme';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { useTheme } from 'react-native-paper';
 import { Switch } from 'react-native-paper';
 import BackButton from '../components/BackButton';
 import RNPickerSelect from 'react-native-picker-select';
@@ -24,8 +20,6 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
     const [switchOn_three, setSwitchOn_three] = useState(false);
     const [switchOn_four, setSwitchOn_four] = useState(false);
 
-    const [searching, setSearching] = useState(false);
-    const { colors } = useTheme();
     const YO = ' years old';
     return (
         <ScrollView>
@@ -164,7 +158,9 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
                         <Image style={styles.delete} source={require('../assets/delete.png')} />
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={{alignSelf:'center', marginRight: 30}} onPress={() => navigation.navigate('Dashboard', {})}>
+                <TouchableOpacity
+                    style={{ alignSelf: 'center', marginRight: 30 }}
+                    onPress={() => navigation.navigate('Dashboard', {})}>
                     <Image style={styles.save} source={require('../assets/Save.png')} />
                 </TouchableOpacity>
             </View>
@@ -193,7 +189,7 @@ const styles = StyleSheet.create({
         height: 60,
         marginLeft: 36,
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
     },
     delete: {
         width: 60,
@@ -226,7 +222,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginLeft: 0,
         marginBottom: 0,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: 'white',
         borderRadius: 100,
         borderWidth: 0,
         fontSize: 15,
@@ -240,7 +236,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginLeft: 0,
         marginBottom: 0,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: 'white',
         borderRadius: 100,
         borderWidth: 0,
         fontSize: 15,
@@ -351,7 +347,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginLeft: 0,
         marginBottom: 10,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: 'white',
         borderRadius: 100,
         borderWidth: 0,
         fontSize: 15,
@@ -364,7 +360,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 0,
         marginBottom: 10,
-        backgroundColor: '#e8e8e8',
+        backgroundColor: 'white',
         borderRadius: 100,
         borderWidth: 0,
         fontSize: 15,
@@ -399,7 +395,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight: '600',
     },
-    body: {},
+    body: { zIndex: -1 },
     bodyContent: {
         flex: 1,
         alignItems: 'center',
@@ -425,7 +421,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 250,
         borderRadius: 30,
-        backgroundColor: theme.colors.surface,
+        backgroundColor: 'theme.colors.surface',
     },
     container: { flexDirection: 'row' },
 });
