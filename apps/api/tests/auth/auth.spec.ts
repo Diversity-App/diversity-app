@@ -6,10 +6,6 @@ import { LoginRequest, RegisterRequest } from '../../../../shared/services';
 import app from '../../src/app';
 
 import prisma from '../../src/tools/prisma';
-<<<<<<< HEAD
-=======
-
->>>>>>> a9a0ba5bc2b3e78cccf50be20f71b2e7541c3250
 import { verify } from 'jsonwebtoken';
 import GoogleService from '../../src/entities/auth/sso/google/google.service';
 import SsoTool from '../../src/tools/sso.tool';
@@ -23,10 +19,6 @@ jest.mock('../../src/tools/auth.tools');
 jest.mock('../../src/entities/auth/sso/google/google.service');
 jest.mock('../../src/tools/sso.tool');
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a9a0ba5bc2b3e78cccf50be20f71b2e7541c3250
 jest.setTimeout(100000);
 
 describe('Auth Basic', () => {
