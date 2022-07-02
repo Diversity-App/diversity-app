@@ -30,6 +30,7 @@ export default class GoogleController implements SSOController, SSOTools {
         next: NextFunction,
     ): Promise<void> {
         try {
+            console.log('req.query', req.query);
             const { code } = req.query;
             if (!code || typeof code !== 'string') {
                 // res.status(400).send({
