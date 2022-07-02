@@ -1,5 +1,5 @@
 export type Navigation = {
-    navigate: (scene: string) => void;
+    navigate: (scene: string, params: {}) => void;
 };
 
 export type User = {
