@@ -1,0 +1,49 @@
+{
+    "login": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Get the login page",
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect to login page"
+          }
+        }
+      }
+    },
+    "callback": {
+      "get": {
+        "tags": [
+          "sso"
+        ],
+        "description": "Consent screen callback, returns token",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Authorization code",
+            "required": true,
+            "allowReserved": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Redirect to login page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../../../openapi.index.json#/components/schemas/InstagramCallbackResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

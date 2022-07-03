@@ -11,6 +11,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { ApiResponse } from './models/ApiResponse';
 export type { GoogleCallbackResponse } from './models/GoogleCallbackResponse';
+export type { InstagramCallbackResponse } from './models/InstagramCallbackResponse';
 export type { HomepageResponse } from './models/HomepageResponse';
 export type { LoginRequest } from './models/LoginRequest';
 export type { LoginResponse } from './models/LoginResponse';

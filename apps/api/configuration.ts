@@ -11,6 +11,12 @@ export default {
     GOOGLE_REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL ?? '',
     GOOGLE_SCOPE: process.env.GOOGLE_SCOPE ?? '',
     GOOGLE_STATE: process.env.GOOGLE_STATE ?? '',
+    INSTAGRAM_CLIENT_ID: process.env.INSTAGRAM_CLIENT_ID ?? '',
+    INSTAGRAM_CLIENT_SECRET: process.env.INSTAGRAM_CLIENT_SECRET ?? '',
+    INSTAGRAM_CALLBACK_URL: process.env.INSTAGRAM_CALLBACK_URL ?? '',
+    INSTAGRAM_REDIRECT_URL: process.env.INSTAGRAM_REDIRECT_URL ?? '',
+    INSTAGRAM_SCOPE: process.env.INSTAGRAM_SCOPE ?? '',
+    INSTAGRAM_STATE: process.env.INSTAGRAM_STATE ?? '',
     JWT_SECRET: process.env.JWT_SECRET ?? '',
     NODE_ENV: process.env.NODE_ENV ?? 'development',
 };

@@ -1,14 +1,31 @@
 import React, { memo } from 'react';
 import { Navigation } from '../types';
-import { Text, StyleSheet, View, Image, Pressable, ScrollView, ActivityIndicator } from 'react-native';
+import {
+    Text,
+    StyleSheet,
+    View,
+    Image,
+    Pressable,
+    ScrollView,
+    ActivityIndicator,
+    ImageSourcePropType,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../core/theme';
 import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
 import Background from '../components/Background';
+import { RouteProp } from '@react-navigation/native';
 
 type Props = {
     navigation: Navigation;
-    route: any;
+    route: RouteProp<
+        {
+            params: {
+                itemName: string;
+            };
+        },
+        'params'
+    >;
 };
 
 const LogoHeader = () => (
@@ -129,52 +146,80 @@ const Details: React.FC<Props> = ({ route, navigation }: Props) => {
                     </View>
                 </View>
                 <View style={styles.infosBox}>
-                    {valueArray.map((item: any) => {
-                        if (item.id === socialMediaSelected) {
-                            return (
-                                <View key={item.id}>
-                                    <Text style={styles.textStat}>Statistics:</Text>
-                                    <Text style={styles.textHashtags}>
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.postsLiked}
-                                        </Text>{' '}
-                                        liked posts
-                                    </Text>
-                                    <Text style={styles.textHashtags}>
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.hashtagsLiked}
-                                        </Text>{' '}
-                                        hashtags liked
-                                    </Text>
-                                    <Text style={styles.textHashtags}>
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.comment}
-                                        </Text>{' '}
-                                        comments written
-                                    </Text>
-                                    <Text style={styles.textHashtags}>
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.share}
-                                        </Text>{' '}
-                                        posts shared
-                                    </Text>
-                                    <Text style={styles.textHashtags}>
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.followed}{' '}
+                    {valueArray.map(
+                        (item: {
+                            id: string;
+                            postsLiked: number;
+                            hashtagsLiked: number;
+                            comment: number;
+                            share: number;
+                            view: number;
+                            followed: number;
+                        }) => {
+                            if (item.id === socialMediaSelected) {
+                                return (
+                                    <View key={item.id}>
+                                        <Text style={styles.textStat}>Statistics:</Text>
+                                        <Text style={styles.textHashtags}>
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.postsLiked}
+                                            </Text>{' '}
+                                            liked posts
                                         </Text>
-                                        account followed
-                                    </Text>
-                                    <Text style={[styles.textHashtags, { justifyContent: 'space-between' }]}>
-                                        A total of{' '}
-                                        <Text style={[{ fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' }]}>
-                                            {item.view}
-                                        </Text>{' '}
-                                        posts seen
-                                    </Text>
-                                </View>
-                            );
-                        }
-                    })}
+                                        <Text style={styles.textHashtags}>
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.hashtagsLiked}
+                                            </Text>{' '}
+                                            hashtags liked
+                                        </Text>
+                                        <Text style={styles.textHashtags}>
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.comment}
+                                            </Text>{' '}
+                                            comments written
+                                        </Text>
+                                        <Text style={styles.textHashtags}>
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.share}
+                                            </Text>{' '}
+                                            posts shared
+                                        </Text>
+                                        <Text style={styles.textHashtags}>
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.followed}{' '}
+                                            </Text>
+                                            account followed
+                                        </Text>
+                                        <Text style={[styles.textHashtags, { justifyContent: 'space-between' }]}>
+                                            A total of{' '}
+                                            <Text
+                                                style={[
+                                                    { fontWeight: 'bold', fontFamily: 'SourceCodePro_400Regular' },
+                                                ]}>
+                                                {item.view}
+                                            </Text>{' '}
+                                            posts seen
+                                        </Text>
+                                    </View>
+                                );
+                            }
+                        },
+                    )}
                     <View
                         style={[
                             {
@@ -217,51 +262,55 @@ const Details: React.FC<Props> = ({ route, navigation }: Props) => {
                 </View>
                 <View style={[styles.line, { marginTop: 350 }]} />
                 <ScrollView horizontal={true} style={[{ marginTop: 50, alignSelf: 'center', width: '100%' }]}>
-                    {dataType.map((item: any) => {
-                        return (
-                            <View key={item.id}>
-                                <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                                    <View style={[styles.hashtagsButton, { width: 180 }]}>
-                                        <Text style={styles.textStat}>
-                                            {'#'}
-                                            {item.id}
-                                        </Text>
+                    {dataType.map(
+                        (item: { id: string; img: ImageSourcePropType; title: string; description: string }) => {
+                            return (
+                                <View key={item.id}>
+                                    <View style={[{ flexDirection: 'row', margin: 5 }]}>
+                                        <View style={[styles.hashtagsButton, { width: 180 }]}>
+                                            <Text style={styles.textStat}>
+                                                {'#'}
+                                                {item.id}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <View style={[{ flexDirection: 'row', margin: 5 }]}>
+                                        <View style={[styles.hashtagsButton, { width: 180 }]}>
+                                            <Text style={styles.textStat}>
+                                                {'#'}
+                                                {item.id}
+                                            </Text>
+                                        </View>
                                     </View>
                                 </View>
-                                <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                                    <View style={[styles.hashtagsButton, { width: 180 }]}>
-                                        <Text style={styles.textStat}>
-                                            {'#'}
-                                            {item.id}
-                                        </Text>
-                                    </View>
-                                </View>
-                            </View>
-                        );
-                    })}
+                            );
+                        },
+                    )}
                 </ScrollView>
                 <View style={[styles.line, { marginTop: 570 }]} />
                 <Text style={styles.actualityText}>CATEGORIES: </Text>
                 <ScrollView horizontal={true} style={[{ alignSelf: 'center' }]}>
-                    {dataType.map((item: any) => {
-                        return (
-                            <View key={item.id}>
-                                <View style={[{ flexDirection: 'row', margin: 5 }]}>
-                                    <View style={[styles.categorieButton, { width: 150 }]}>
-                                        <Image style={styles.tinyLogo} source={item.img} />
+                    {dataType.map(
+                        (item: { id: string; img: ImageSourcePropType; title: string; description: string }) => {
+                            return (
+                                <View key={item.id}>
+                                    <View style={[{ flexDirection: 'row', margin: 5 }]}>
+                                        <View style={[styles.categorieButton, { width: 150 }]}>
+                                            <Image style={styles.tinyLogo} source={item.img} />
 
-                                        <Text style={styles.textStat}>{item.id}</Text>
+                                            <Text style={styles.textStat}>{item.id}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={[{ flexDirection: 'row' }]}>
+                                        <View style={[styles.categorieButton, { width: 150 }]}>
+                                            <Image style={styles.tinyLogo} source={item.img} />
+                                            <Text style={styles.textStat}>{item.id}</Text>
+                                        </View>
                                     </View>
                                 </View>
-                                <View style={[{ flexDirection: 'row' }]}>
-                                    <View style={[styles.categorieButton, { width: 150 }]}>
-                                        <Image style={styles.tinyLogo} source={item.img} />
-                                        <Text style={styles.textStat}>{item.id}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        );
-                    })}
+                            );
+                        },
+                    )}
                 </ScrollView>
             </ScrollView>
         );
