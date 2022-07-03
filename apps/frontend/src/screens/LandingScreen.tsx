@@ -27,7 +27,7 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                     justifyContent: 'center',
                 }}
                 color={'black'}
-                onPress={() => navigation.navigate('LoginScreen')}>
+                onPress={() => navigation.navigate('LoginScreen', {})}>
                 Log In
             </Button>
             <Button
@@ -40,8 +40,21 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                     justifyContent: 'center',
                 }}
                 color={'black'}
-                onPress={() => navigation.navigate('RegisterScreen')}>
+                onPress={() => navigation.navigate('RegisterScreen', {})}>
                 Sign Up
+            </Button>
+            <Button
+                style={{
+                    margin: 10,
+                    borderRadius: 25,
+                    width: 150,
+                    height: 50,
+                    backgroundColor: 'white',
+                    justifyContent: 'center',
+                }}
+                color={'black'}
+                onPress={() => navigation.navigate('Home', {})}>
+                Dev
             </Button>
         </Background>
     );
