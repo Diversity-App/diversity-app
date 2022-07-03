@@ -37,7 +37,7 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
                         <Text style={styles.text}>Age: </Text>
                         <View style={styles.picker}>
                             <RNPickerSelect
-                                onValueChange={(value: any) => console.log(value)}
+                                onValueChange={(value: {}) => console.log(value)}
                                 items={[
                                     { label: '10' + YO, value: '10' },
                                     { label: '11' + YO, value: '11' },
@@ -70,11 +70,13 @@ const Settings: React.FC<Props> = ({ navigation }: Props) => {
                     </View>
                     <Text style={styles.text}>Select A Country: </Text>
                     <View style={{ marginVertical: 5, marginBottom: 15, borderBottomWidth: 1 }}>
+                        {/* <CountryPicker
+                        /> */}
                         <CountryPicker
-                            onSelect={(country: any) => {
-                                console.log('name', country.name);
-                            }}
                             subRegion={''}
+                            onSelect={(country) => {
+                                console.log(country);
+                            }}
                         />
                     </View>
                 </View>
