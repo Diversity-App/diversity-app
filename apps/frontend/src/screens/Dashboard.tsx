@@ -144,7 +144,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                             itemName: item.title,
                                         });
                                     }}>
-                                    <Ionicons name={item.icon as any} size={30} />
+                                    <Ionicons name={item.icon as unknown as undefined} size={30} />
                                 </Pressable>
                             </View>
                         ))}
@@ -176,7 +176,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                     }}>
                                     {item.title}
                                 </Text>
-                                <Ionicons name={item.icon as any} size={60} />
+                                <Ionicons name={item.icon as unknown as undefined} size={60} />
                                 <Text
                                     style={{
                                         fontSize: 35,
