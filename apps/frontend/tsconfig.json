@@ -11,7 +11,8 @@
       //      "react",
       "react-native",
       "jest"
-    ]
+    ],
+    "noImplicitAny": true
   },
   "compileOnSave": false
 }
