@@ -61,3 +61,44 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
 };
 
 export default memo(LandingScreen);
+
+// import React, { Component } from 'react';
+// import { SafeAreaView, View } from 'react-native';
+// import { WebView } from 'react-native-webview';
+// import { Button } from 'react-native-paper';
+// import { Navigation } from '../types';
+
+// type Props = {
+//     navigation: Navigation;
+// };
+// const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
+//     const [openWebViewInsta, setIsopenWebViewInsta] = React.useState(false);
+
+//     if (openWebViewInsta) {
+//         return (
+//             <View style={{ flex: 1 }}>
+//                 <WebView
+//                     style={{
+//                         flex: 1,
+//                         // backgroundColor: '#fff',
+//                         marginTop: 20,
+//                     }}
+//                     source={{ uri: 'https://instagram.com' }}
+//                 />
+//             </View>
+//         );
+//     } else {
+//         return (
+//             <SafeAreaView style={{ flex: 1 }}>
+//                 <Button
+//                     onPress={() => {
+//                         setIsopenWebViewInsta(true);
+//                     }}>
+//                     ok
+//                 </Button>
+//             </SafeAreaView>
+//         );
+//     }
+// };
+
+// export default LandingScreen;
