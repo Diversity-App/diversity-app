@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Image } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
@@ -11,6 +11,7 @@ import { Input } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 import { ApiClient, ApiResponse } from '../../../../shared/services';
+import { WebView } from 'react-native-webview';
 
 type Props = {
     navigation: Navigation;
@@ -31,6 +32,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const apiClient = new ApiClient();
+    const [openWebViewInsta, setIsopenWebViewInsta] = React.useState(false);
 
     const _onLoginPressed = () => {
         // tmp code
@@ -76,6 +78,21 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
             <Background>
                 <ActivityIndicator size="large" />
             </Background>
+        );
+    } else if (openWebViewInsta) {
+        // const OAuthUrl =
+        //     'https://api.instagram.com/oauth/authorize/?client_id=760184642069092&redirect_uri=https://google.com&response_type=code&scope=basic+public_content';
+        // https://docs.expo.dev/guides/authentication/#facebook
+        return (
+            <View style={{ flex: 1 }}>
+                <WebView
+                    style={{
+                        flex: 1,
+                        marginTop: 20,
+                    }}
+                    source={{ uri: 'https://instagram.com' }}
+                />
+            </View>
         );
     } else {
         return (
@@ -146,6 +163,17 @@ const LoginScreen: React.FC<Props> = ({ navigation }: Props) => {
                     }}
                     onPress={_onLoginPressed}>
                     Log In
+                </Button>
+                <Button
+                    onPress={() => {
+                        setIsopenWebViewInsta(true);
+                    }}>
+                    <Image
+                        // onPress={() => {
+                        //     setIsopenWebViewInsta(true);
+                        // }}
+                        source={require('../assets/instagram_logo_1.png')}
+                        style={[{ marginBottom: 12, marginLeft: 15, width: 30, height: 30 }]}></Image>
                 </Button>
                 {password.error ? <Text style={{ color: 'red' }}>{password.error}</Text> : null}
                 {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
