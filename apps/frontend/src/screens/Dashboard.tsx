@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import { Navigation } from '../types';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Text, StyleSheet, View, Image, Pressable, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, View, Image, Pressable, ScrollView, ActivityIndicator, Alert, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../core/theme';
 import Background from '../components/Background';
 import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
+
 type Props = {
     navigation: Navigation;
 };
@@ -15,6 +16,13 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
     let [fontsLoaded] = useFonts({
         SourceCodePro_400Regular,
     });
+
+    // const [visible, setVisible] = React.useState(true);
+    const [modalVisible, setModalVisible] = React.useState(true);
+
+    // const showModal = () => setVisible(true);
+    // const hideModal = () => setVisible(false);
+    // const containerStyle = { backgroundColor: 'white', padding: 15, margin: 20, borderRadius: 10 };
 
     const dataArray: {
         id: number;
@@ -102,9 +110,64 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                 <ActivityIndicator size="large" />
             </Background>
         );
+    }
+    if (modalVisible === true) {
+        return (
+            // <Provider>
+            //     <View style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
+            //         <Portal>
+            //             <Modal
+            //                 visible={visible}
+            //                 onDismiss={hideModal}
+            //                 contentContainerStyle={containerStyle}>
+            //                 <Image
+            //                     source={require('../assets/popUp_vpn.png')}
+            //                     style={[{ width: '100%', height: 150 }]}
+            //                 />
+            //                 <Text style={styles.title_vpn_popUp}>VPN ALERT</Text>
+            //                 <Button mode="contained" onPress={hideModal}>
+            //                     <Text>OK</Text>
+            //                 </Button>
+            //             </Modal>
+            //         </Portal>
+            //     </View>
+            // </Provider>
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            {/* <Text style={styles.modalText}>Hello World!</Text>
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.textStyle}>Hide Modal</Text>
+                            </Pressable> */}
+                            <Image source={require('../assets/popUp_vpn.png')} style={[{ width: 300, height: 130 }]} />
+                            <Text style={styles.title_vpn_popUp}>VPN ALERT</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text>{'\u2022'}</Text>
+                                <Text style={{ flex: 1, paddingLeft: 5 }}>hello</Text>
+                            </View>
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.textStyle}>Hide Modal</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+        );
     } else {
         return (
-            // <Background>
+            // <>
             <ScrollView style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
                 <View style={styles.header}>
                     <LogoHeader />
@@ -129,6 +192,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                         lineCap="round"
                         style={styles.progress}
                     />
+                    {/* <Button onPress={showModal}>Show Modal</Button> */}
                     <Text style={styles.scoreValue}>75%</Text>
                     <View style={styles.line} />
                     <Text style={styles.actualityTexte}>Actuality :</Text>
@@ -190,12 +254,58 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                     </ScrollView>
                 </View>
             </ScrollView>
-            // </Background>
+            // </>
         );
     }
 };
 
 const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // marginTop: 22,
+        backgroundColor: theme.colors.surface,
+        width: '100%',
+        height: '100%',
+    },
+    modalView: {
+        margin: 10,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 15,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        // elevation: 2,
+        width: 100,
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+    buttonClose: {
+        backgroundColor: '#D9D9D9',
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+
     actualityButton: {
         backgroundColor: 'white',
         borderRadius: 40,
@@ -282,6 +392,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
+    },
+    title_vpn_popUp: {
+        fontFamily: 'SourceCodePro_400Regular',
+        fontWeight: 'bold',
+        fontSize: 20,
+        textAlign: 'center',
     },
 });
 
