@@ -13,5 +13,7 @@ router.get('/twitter/profile', verifyToken, DataController.getTwitterProfile);
 router.get('/twitter/search', verifyToken, DataController.searchTweets);
 router.get('/twitter/bookmarks', verifyToken, DataController.myBookMarks);
 
+router.get('/user', verifyToken, DataController.getUserInfos);
+router.get('/posts', verifyToken, DataController.getUserPosts);
 
 export default router;

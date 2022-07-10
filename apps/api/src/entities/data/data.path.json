@@ -39,6 +39,46 @@
       }
     }
   },
+  "posts": {
+    "get": {
+      "description": "Get the user instagram posts",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/UserPostsResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "infos": {
+    "get": {
+      "description": "Get the user instagram infos",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/UserInfosResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "twitter-liked": {
     "get": {
       "description": "Get liked tweeets",

@@ -7,6 +7,7 @@ import StatsTool from '../../tools/stats.tool';
 import { HomepageResponse, StatsResponse } from '../../../../../shared/services';
 import { ApiError } from '../../types';
 import TwitterApiWrapper from '../../tools/twitter/api.tool';
+import InstagramApiWrapper from '../../tools/instagram/api.tool';
 
 export default class DataController {
     static async getStats(req: Request, res: Response<StatsResponse>, next: NextFunction) {
@@ -122,6 +123,29 @@ export default class DataController {
         }
     }
 
+    static async getUserInfos(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+
+            const instagramToken: Token = await SsoTool.getProviderToken(user.id, 'Instagram');
+
+            if (!instagramToken) {
+                throw new ApiError(401, 'You must be logged in to access this page');
+            }
+
+            const data = await InstagramApiWrapper.UserInfos(instagramToken.access_token);
+
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully retrieved data',
+                data: data,
+            });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+
     static async myBookMarks(req: Request, res: Response, next: NextFunction) {
         try {
             const { user } = req;
@@ -137,6 +161,27 @@ export default class DataController {
                     next: data.meta.next_token ? data.meta.next_token : '',
                     prev: data.meta.next_token ? data.meta.previous_token : '',
                 },
+            });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    static async getUserPosts(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { user } = req;
+
+            const instagramToken: Token = await SsoTool.getProviderToken(user.id, 'Instagram');
+
+            if (!instagramToken) {
+                throw new ApiError(401, 'You must be logged in to access this page');
+            }
+
+            const data = await InstagramApiWrapper.UserPosts(instagramToken.access_token);
+            res.status(200).json({
+                status: 'success',
+                message: 'Successfully retrieved data',
+                data: data,
             });
         } catch (e) {
             next(e);

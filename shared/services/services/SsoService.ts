@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { GoogleCallbackResponse } from '../models/GoogleCallbackResponse';
+import type { InstagramCallbackResponse } from '../models/InstagramCallbackResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -43,4 +44,26 @@ export class SsoService {
         });
     }
 
+
+    public getAuthSsoInstagramLogin(): CancelablePromise<void> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/auth/sso/instagram/login',
+            errors: {
+                302: `Redirect to login page`,
+            },
+        });
+    }
+
+    public getAuthSsoInstagramCallback(
+        code: string,
+    ): CancelablePromise<InstagramCallbackResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/auth/sso/instagram/callback',
+            query: {
+                'code': code,
+            },
+        });
+    }
 }

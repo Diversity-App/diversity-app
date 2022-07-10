@@ -147,6 +147,92 @@
         }
       ]
     },
+    "UserInfosSummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "media_count": {
+          "type": "number"
+        },
+        "account_type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "media_count",
+        "account_type"
+      ]
+    },
+    "UserInfosResponse": {
+      "allOf": [
+        {
+          "$ref": "../openapi.components.json#/schemas/ApiResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "../openapi.components.json#/schemas/UserInfosSummary"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        }
+      ]
+    },
+    "UserPostsSummary": {
+      "type": "string",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "media_type": {
+          "type": "string"
+        },
+        "media_url": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "media_type",
+        "media_url",
+        "username",
+        "timestamp"
+      ]
+    },
+    "UserPostsResponse": {
+      "allOf": [
+        {
+          "$ref": "../openapi.components.json#/schemas/ApiResponse"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "../openapi.components.json#/schemas/UserPostsSummary"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        }
+      ]
+    },
     "LikedTweets": {
       "type": "object",
       "properties": {

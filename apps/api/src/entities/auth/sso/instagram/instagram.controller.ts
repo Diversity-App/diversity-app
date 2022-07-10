@@ -2,22 +2,21 @@ import { SSOController, SSOTools } from '../../../../types.d';
 import { NextFunction, Request, Response } from 'express';
 import SsoTool from '../../../../tools/sso.tool';
 
-import GoogleService from './google.service';
-import { GoogleCallbackResponse } from '../../../../../../../shared/services';
+import InstagramService from './instagram.service';
+import { InstagramCallbackResponse } from '../../../../../../../shared/services';
 import { ApiError } from '../../../../types';
 
-export default class GoogleController implements SSOController, SSOTools {
+export default class InstagramController implements SSOController, SSOTools {
     public static async getCode(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const params = {
-                client_id: GoogleService.clientId,
-                redirect_uri: GoogleService.redirectUrl,
-                scope: GoogleService.scope,
-                state: GoogleService.state,
+                client_id: InstagramService.clientId,
+                redirect_uri: InstagramService.redirectUrl,
+                scope: InstagramService.scope,
+                state: InstagramService.state,
                 response_type: 'code',
-                prompt: 'consent',
             };
-            const url = `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(params).toString()}`;
+            const url = `https://www.instagram.com/oauth/authorize?${new URLSearchParams(params).toString()}`;
             res.redirect(url);
         } catch (e) {
             next(e);
@@ -26,11 +25,10 @@ export default class GoogleController implements SSOController, SSOTools {
 
     public static async getToken(
         req: Request<{ code: string }>,
-        res: Response<GoogleCallbackResponse>,
+        res: Response<InstagramCallbackResponse>,
         next: NextFunction,
     ): Promise<void> {
         try {
-            console.log('req.query', req.query);
             const { code } = req.query;
             if (!code || typeof code !== 'string') {
                 // res.status(400).send({
@@ -40,7 +38,7 @@ export default class GoogleController implements SSOController, SSOTools {
                 throw new ApiError(400, 'Bad request');
             }
 
-            const { user } = req.session;
+            const { user } = req;
             if (!user) {
                 // res.status(401).send({
                 //     status: 'error',
@@ -49,13 +47,11 @@ export default class GoogleController implements SSOController, SSOTools {
                 // return;
                 throw new ApiError(401, 'Unauthorized');
             }
-            const token = await GoogleService.fetchToken(code);
-            console.log(token);
+            const token = await InstagramService.fetchToken(code);
 
-            const providerUser = await GoogleService.fetchUser(token.access_token);
-            console.log(providerUser);
+            const providerUser = await InstagramService.fetchUser(token.access_token);
 
-            await SsoTool.syncUserToken(user.id, providerUser.sub, 'Google', token);
+            await SsoTool.syncUserToken(user.id, providerUser.id, 'Instagram', token);
 
             res.json({
                 message: 'Authentication successful',

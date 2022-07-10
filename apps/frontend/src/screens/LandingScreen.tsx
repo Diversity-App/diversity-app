@@ -27,7 +27,7 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                     justifyContent: 'center',
                 }}
                 color={'black'}
-                onPress={() => navigation.navigate('LoginScreen')}>
+                onPress={() => navigation.navigate('LoginScreen', {})}>
                 Log In
             </Button>
             <Button
@@ -40,11 +40,65 @@ const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
                     justifyContent: 'center',
                 }}
                 color={'black'}
-                onPress={() => navigation.navigate('RegisterScreen')}>
+                onPress={() => navigation.navigate('RegisterScreen', {})}>
                 Sign Up
+            </Button>
+            <Button
+                style={{
+                    margin: 10,
+                    borderRadius: 25,
+                    width: 150,
+                    height: 50,
+                    backgroundColor: 'white',
+                    justifyContent: 'center',
+                }}
+                color={'black'}
+                onPress={() => navigation.navigate('Home', {})}>
+                Dev
             </Button>
         </Background>
     );
 };
 
 export default memo(LandingScreen);
+
+// import React, { Component } from 'react';
+// import { SafeAreaView, View } from 'react-native';
+// import { WebView } from 'react-native-webview';
+// import { Button } from 'react-native-paper';
+// import { Navigation } from '../types';
+
+// type Props = {
+//     navigation: Navigation;
+// };
+// const LandingScreen: React.FC<Props> = ({ navigation }: Props) => {
+//     const [openWebViewInsta, setIsopenWebViewInsta] = React.useState(false);
+
+//     if (openWebViewInsta) {
+//         return (
+//             <View style={{ flex: 1 }}>
+//                 <WebView
+//                     style={{
+//                         flex: 1,
+//                         // backgroundColor: '#fff',
+//                         marginTop: 20,
+//                     }}
+//                     source={{ uri: 'https://instagram.com' }}
+//                 />
+//             </View>
+//         );
+//     } else {
+//         return (
+//             <SafeAreaView style={{ flex: 1 }}>
+//                 <Button
+//                     onPress={() => {
+//                         setIsopenWebViewInsta(true);
+//                     }}>
+//                     ok
+//                 </Button>
+//             </SafeAreaView>
+//         );
+//     }
+// };
+
+// export default LandingScreen;

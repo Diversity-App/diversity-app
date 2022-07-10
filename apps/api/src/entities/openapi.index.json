@@ -29,6 +29,12 @@
     "/auth/sso/twitter/callback": {
       "$ref": "./auth/sso/twitter/twitter.path.json#/callback"
     },
+    "/auth/sso/instagram/login": {
+      "$ref": "./auth/sso/instagram/instagram.path.json#/login"
+    },
+    "/auth/sso/instagram/callback": {
+      "$ref": "./auth/sso/instagram/instagram.path.json#/callback"
+    },
     "/data/stats": {
       "$ref": "./data/data.path.json#/stats"
     },
@@ -46,6 +52,12 @@
     },
     "/data/twitter/bookmarks": {
       "$ref": "./data/data.path.json#/twitter-bookmarks"
+    },
+    "/data/posts": {
+      "$ref": "./data/data.path.json#/posts"
+    },
+    "/data/user": {
+      "$ref": "./data/data.path.json#/infos"
     }
   },
   "components": {
@@ -94,6 +106,15 @@
       },
       "Bookmarks": {
         "$ref": "./data/data.components.json#/schemas/Bookmarks"
+      },
+      "InstagramCallbackResponse": {
+        "$ref": "./auth/sso/instagram/instagram.components.json#/schemas/InstagramCallbackResponse"
+      },
+      "UserInfosSummary": {
+        "$ref": "./data/data.components.json#/schemas/UserInfosSummary"
+      },
+      "UserPostsSummary": {
+        "$ref": "./data/data.components.json#/schemas/UserPostsSummary"
       }
     }
   }
