@@ -59,7 +59,6 @@
       }
     }
   },
-
   "infos": {
     "get": {
       "description": "Get the user instagram infos",
@@ -73,6 +72,86 @@
             "application/json": {
               "schema": {
                 "$ref": "../openapi.components.json#/schemas/UserInfosResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "twitter-liked": {
+    "get": {
+      "description": "Get liked tweeets",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/LikedTweets"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "twitter-profile": {
+    "get": {
+      "description": "Get my user profile twitter",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/TwitterProfile"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "twitter-search": {
+    "get": {
+      "description": "Search tweets",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/SearchTweets"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "twitter-bookmarks": {
+    "get": {
+      "description": "Search tweets",
+      "tags": [
+        "data"
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../openapi.components.json#/schemas/Bookmarks"
               }
             }
           }

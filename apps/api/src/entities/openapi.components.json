@@ -39,6 +39,18 @@
     "StatsResponse": {
       "$ref": "./data/data.components.json#/schemas/StatsResponse"
     },
+    "LikedTweets": {
+      "$ref": "./data/data.components.json#/schemas/LikedTweets"
+    },
+    "TwitterProfile": {
+      "$ref": "./data/data.components.json#/schemas/TwitterProfile"
+    },
+    "SearchTweets": {
+      "$ref": "./data/data.components.json#/schemas/SearchTweets"
+    },
+    "Bookmarks": {
+      "$ref": "./data/data.components.json#/schemas/Bookmarks"
+    },
     "UserInfosResponse": {
       "$ref": "./data/data.components.json#/schemas/UserInfosResponse"
     },

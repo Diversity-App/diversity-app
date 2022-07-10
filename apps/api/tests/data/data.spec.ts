@@ -8,8 +8,9 @@ import { verify } from 'jsonwebtoken';
 jest.mock('jsonwebtoken');
 
 const user = {
-    id: 1,
+    id: 6,
 };
+
 //
 // const data: StatSummary = {
 //     items: [],
@@ -19,6 +20,7 @@ const user = {
 //     tags: [],
 //     tagsRatio: [],
 // };
+
 
 describe('Data', () => {
     describe('get homepage', () => {
@@ -33,6 +35,48 @@ describe('Data', () => {
             expect(response.status).toBe(500);
         });
     });
+/*
+    describe('get liked tweets', () => {
+        it('should successfully return data', async () => {
+            (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
+            const agent = supertest.agent(app);
+            agent.auth('123', { type: 'bearer' });
+            const response = await agent.get('/v1/data/twitter/liked').set('Authorization', `Bearer 123`);
+            expect(response.status).toBe(200);
+        });
+    });
+
+    describe('get twitter profile', () => {
+        it('should successfully return data', async () => {
+            (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
+            const agent = supertest.agent(app);
+            agent.auth('123', { type: 'bearer' });
+            const response = await agent.get('/v1/data/twitter/profile').set('Authorization', `Bearer 123`);
+            expect(response.status).toBe(200);
+        });
+    });
+
+    describe('sarch tweets', () => {
+        it('should successfully return data', async () => {
+            (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
+            const agent = supertest.agent(app);
+            agent.auth('123', { type: 'bearer' });
+            const response = await agent.get('/v1/data/twitter/search?query=%23starcitizen').set('Authorization', `Bearer 123`);
+            expect(response.status).toBe(200);
+        });
+    });
+
+    describe('get my bookmarks', () => {
+        it('should successfully return data', async () => {
+            (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
+            const agent = supertest.agent(app);
+            agent.auth('123', { type: 'bearer' });
+            const response = await agent.get('/v1/data/twitter/bookmarks').set('Authorization', `Bearer 123`);
+            expect(response.status).toBe(200);
+        });
+    });
+*/
+
     // describe('get instagram user infos', () => {
     //     it('should successfully return data', async () => {
     //         (verify as jest.MockedFunction<typeof verify>).mockReturnValue(user as any);
@@ -59,4 +103,5 @@ describe('Data', () => {
     //         expect(response.status).toBe(401);
     //     });
     // });
+
 });

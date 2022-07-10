@@ -23,6 +23,12 @@
     "/auth/sso/google/callback": {
       "$ref": "./auth/sso/google/google.path.json#/callback"
     },
+    "/auth/sso/twitter/login": {
+      "$ref": "./auth/sso/twitter/twitter.path.json#/login"
+    },
+    "/auth/sso/twitter/callback": {
+      "$ref": "./auth/sso/twitter/twitter.path.json#/callback"
+    },
     "/auth/sso/instagram/login": {
       "$ref": "./auth/sso/instagram/instagram.path.json#/login"
     },
@@ -34,6 +40,18 @@
     },
     "/data/homePage": {
       "$ref": "./data/data.path.json#/homePage"
+    },
+    "/data/twitter/liked": {
+      "$ref": "./data/data.path.json#/twitter-liked"
+    },
+    "/data/twitter/profile": {
+      "$ref": "./data/data.path.json#/twitter-profile"
+    },
+    "/data/twitter/search": {
+      "$ref": "./data/data.path.json#/twitter-search"
+    },
+    "/data/twitter/bookmarks": {
+      "$ref": "./data/data.path.json#/twitter-bookmarks"
     },
     "/data/posts": {
       "$ref": "./data/data.path.json#/posts"
@@ -73,6 +91,21 @@
       },
       "GoogleCallbackResponse": {
         "$ref": "./auth/sso/google/google.components.json#/schemas/GoogleCallbackResponse"
+      },
+      "TwitterCallbackResponse": {
+        "$ref": "./auth/sso/twitter/twitter.components.json#/schemas/TwitterCallbackResponse"
+      },
+      "LikedTweets": {
+        "$ref": "./data/data.components.json#/schemas/LikedTweets"
+      },
+      "TwitterProfile": {
+        "$ref": "./data/data.components.json#/schemas/TwitterProfile"
+      },
+      "SearchTweets": {
+        "$ref": "./data/data.components.json#/schemas/SearchTweets"
+      },
+      "Bookmarks": {
+        "$ref": "./data/data.components.json#/schemas/Bookmarks"
       },
       "InstagramCallbackResponse": {
         "$ref": "./auth/sso/instagram/instagram.components.json#/schemas/InstagramCallbackResponse"
