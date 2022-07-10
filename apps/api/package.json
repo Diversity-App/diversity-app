@@ -10,6 +10,7 @@
     "atlas"
   ],
   "devDependencies": {
+    "@types/base-64": "^1.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
@@ -33,6 +34,7 @@
     "openapi-typescript": "^5.3.0",
     "openapi-typescript-codegen": "^0.22.0",
     "prettier": "^2.3.2",
+    "prisma": "^3.15.1",
     "ts-jest": "^28.0.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.4"
@@ -79,8 +81,9 @@
   },
   "homepage": "https://github.com/Diversity-App/backend#readme",
   "dependencies": {
-    "@prisma/client": "^3.14.0",
+    "@prisma/client": "^3.15.1",
     "axios": "^0.24.0",
+    "base-64": "^1.0.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -93,6 +96,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.1",
     "pg": "^8.7.1",
+    "qs": "^6.10.5",
     "superagent": "^7.1.3",
     "supertest": "^6.2.3"
   }

@@ -106,6 +106,7 @@ export default class SsoTool {
                 access_token: true,
                 refresh_token: true,
                 expires_in: true,
+                client_id: true,
             },
         });
     }

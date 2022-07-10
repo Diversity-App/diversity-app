@@ -33,7 +33,7 @@ declare module 'express' {
 const app = express();
 app.use(session(sessionConfig));
 
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
