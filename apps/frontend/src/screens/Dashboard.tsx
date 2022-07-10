@@ -1,11 +1,22 @@
 import React, { memo } from 'react';
 import { Navigation } from '../types';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Text, StyleSheet, View, Image, Pressable, ScrollView, ActivityIndicator, Alert, Modal } from 'react-native';
+import {
+    Text,
+    StyleSheet,
+    View,
+    Image,
+    Pressable,
+    ScrollView,
+    ActivityIndicator,
+    Alert,
+    Modal,
+    Linking,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../core/theme';
 import Background from '../components/Background';
-import { useFonts, SourceCodePro_400Regular } from '@expo-google-fonts/dev';
+import { useFonts, SourceCodePro_400Regular, SourceCodePro_800ExtraBold } from '@expo-google-fonts/dev';
 
 type Props = {
     navigation: Navigation;
@@ -15,9 +26,10 @@ const LogoHeader = () => <Image source={require('../assets/logo_blanc.png')} sty
 const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
     let [fontsLoaded] = useFonts({
         SourceCodePro_400Regular,
+        SourceCodePro_800ExtraBold,
     });
 
-    const [modalVisible, setModalVisible] = React.useState(true);
+    const [modalVisible, setModalVisible] = React.useState<boolean>(true);
 
     const dataArray: {
         id: number;
@@ -119,7 +131,13 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                     }}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Image source={require('../assets/popUp_vpn.png')} style={[{ width: 300, height: 130 }]} />
+                            <View style={[{ alignItems: 'center', justifyContent: 'center' }]}>
+                                <Image
+                                    resizeMode="cover"
+                                    source={require('../assets/alert_vpn.png')}
+                                    style={[{ width: '100%', height: 165, borderRadius: 10 }]}
+                                />
+                            </View>
                             <Text style={styles.title_vpn_popUp}>VPN ALERT</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 <Text style={styles.text_pop_up_vpn}>
@@ -133,14 +151,18 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                 </Text>
                             </View>
                             <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                <Text style={styles.text_pop_up_vpn}>
+                                <Text
+                                    style={[styles.pop_up_link]}
+                                    onPress={() => {
+                                        Linking.openURL('https://diversity-app.fr/');
+                                    }}>
                                     learn more about the data we collect and how we use it.
                                 </Text>
                             </View>
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.textStyle}>Hide Modal</Text>
+                                <Text style={styles.textStyle}>Hide Alert</Text>
                             </Pressable>
                         </View>
                     </View>
@@ -149,7 +171,6 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
         );
     } else {
         return (
-            // <>
             <ScrollView style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
                 <View style={styles.header}>
                     <LogoHeader />
@@ -233,22 +254,28 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                     </ScrollView>
                 </View>
             </ScrollView>
-            // </>
         );
     }
 };
 
 const styles = StyleSheet.create({
+    pop_up_link: {
+        textDecorationLine: 'underline',
+        marginBottom: 15,
+        flex: 1,
+        paddingLeft: 5,
+        textAlign: 'center',
+        fontFamily: 'SourceCodePro_800ExtraBold',
+    },
     text_pop_up_vpn: {
         flex: 1,
         paddingLeft: 5,
         textAlign: 'center',
+        fontFamily: 'SourceCodePro_400Regular',
     },
     centeredView: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        // marginTop: 22,
         backgroundColor: theme.colors.surface,
         width: '100%',
         height: '100%',
@@ -258,21 +285,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
         padding: 15,
-        alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
+        shadowOpacity: 7,
+        shadowRadius: 12,
         elevation: 5,
     },
     button: {
         borderRadius: 10,
         padding: 10,
-        // elevation: 2,
-        width: 100,
+        width: '100%',
     },
     buttonOpen: {
         backgroundColor: '#F194FF',
@@ -281,9 +306,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D9D9',
     },
     textStyle: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         textAlign: 'center',
+        fontFamily: 'SourceCodePro_400Regular',
     },
     modalText: {
         marginBottom: 15,
@@ -378,7 +404,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     title_vpn_popUp: {
-        fontFamily: 'SourceCodePro_400Regular',
+        fontFamily: 'SourceCodePro_800ExtraBold',
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
