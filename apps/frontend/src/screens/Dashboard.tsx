@@ -17,12 +17,7 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
         SourceCodePro_400Regular,
     });
 
-    // const [visible, setVisible] = React.useState(true);
     const [modalVisible, setModalVisible] = React.useState(true);
-
-    // const showModal = () => setVisible(true);
-    // const hideModal = () => setVisible(false);
-    // const containerStyle = { backgroundColor: 'white', padding: 15, margin: 20, borderRadius: 10 };
 
     const dataArray: {
         id: number;
@@ -113,25 +108,6 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
     }
     if (modalVisible === true) {
         return (
-            // <Provider>
-            //     <View style={{ backgroundColor: theme.colors.surface, flex: 1, width: '100%' }}>
-            //         <Portal>
-            //             <Modal
-            //                 visible={visible}
-            //                 onDismiss={hideModal}
-            //                 contentContainerStyle={containerStyle}>
-            //                 <Image
-            //                     source={require('../assets/popUp_vpn.png')}
-            //                     style={[{ width: '100%', height: 150 }]}
-            //                 />
-            //                 <Text style={styles.title_vpn_popUp}>VPN ALERT</Text>
-            //                 <Button mode="contained" onPress={hideModal}>
-            //                     <Text>OK</Text>
-            //                 </Button>
-            //             </Modal>
-            //         </Portal>
-            //     </View>
-            // </Provider>
             <View style={styles.centeredView}>
                 <Modal
                     animationType="slide"
@@ -143,17 +119,23 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                     }}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            {/* <Text style={styles.modalText}>Hello World!</Text>
-                            <Pressable
-                                style={[styles.button, styles.buttonClose]}
-                                onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.textStyle}>Hide Modal</Text>
-                            </Pressable> */}
                             <Image source={require('../assets/popUp_vpn.png')} style={[{ width: 300, height: 130 }]} />
                             <Text style={styles.title_vpn_popUp}>VPN ALERT</Text>
                             <View style={{ flexDirection: 'row' }}>
-                                <Text>{'\u2022'}</Text>
-                                <Text style={{ flex: 1, paddingLeft: 5 }}>hello</Text>
+                                <Text style={styles.text_pop_up_vpn}>
+                                    {'\u2022'} Diversity use a VPN to collect your data.
+                                </Text>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={styles.text_pop_up_vpn}>
+                                    {'\u2022'} Nothing is stored, the data just goes through our algorithm to give you
+                                    statistics.
+                                </Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                <Text style={styles.text_pop_up_vpn}>
+                                    learn more about the data we collect and how we use it.
+                                </Text>
                             </View>
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
@@ -176,7 +158,6 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                         <Ionicons name={'ios-home-outline'} size={25} />
                     </Pressable>
                     <Pressable style={styles.headerButtonTwo} onPress={() => navigation.navigate('Settings', {})}>
-                        {/* <Text>ok</Text> */}
                         <Ionicons name={'ios-settings-outline'} size={25} />
                     </Pressable>
                 </View>
@@ -192,7 +173,6 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                         lineCap="round"
                         style={styles.progress}
                     />
-                    {/* <Button onPress={showModal}>Show Modal</Button> */}
                     <Text style={styles.scoreValue}>75%</Text>
                     <View style={styles.line} />
                     <Text style={styles.actualityTexte}>Actuality :</Text>
@@ -202,7 +182,6 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
                                 <Pressable
                                     style={styles.actualityButton}
                                     onPress={() => {
-                                        /* 1. Navigate to the Details route with params */
                                         navigation.navigate('DetailsScreen', {
                                             itemId: item.id,
                                             itemName: item.title,
@@ -260,6 +239,11 @@ const Dashboard: React.FC<Props> = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
+    text_pop_up_vpn: {
+        flex: 1,
+        paddingLeft: 5,
+        textAlign: 'center',
+    },
     centeredView: {
         flex: 1,
         justifyContent: 'center',
@@ -398,6 +382,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
+        margin: 20,
     },
 });
 
