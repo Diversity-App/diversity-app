@@ -1,0 +1,11 @@
+test:
+- **/*.spec.js
+
+frontend:
+- any: ['apps/frontend/**/*']
+
+api:
+- any: ['apps/api/**/*']
+
+shared:
+- any: ['shared/*']
